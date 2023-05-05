@@ -1,0 +1,1 @@
+git message template test
