@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "rank": 1,
+        "department": "Legal",
+        "bulletin": "dui",
+        "title": "ipsum praesent blandit lacinia erat vestibulum",
+        "uploadDate": "2022-05-20",
+        "view": 2777
+    },
+    {
+        "id": 2,
+        "rank": 2,
+        "department": "Research and Development",
+        "bulletin": "ipsum",
+        "title": "phasellus id sapien in sapien iaculis congue vivamus metus arcu",
+        "uploadDate": "2023-05-13",
+        "view": 9006
+    },
+    {
+        "id": 3,
+        "rank": 3,
+        "department": "Business Development",
+        "bulletin": "ultrices",
+        "title": "gravida nisi at nibh in hac habitasse platea dictumst",
+        "uploadDate": "2023-01-16",
+        "view": 7439
+    },
+    {
+        "id": 4,
+        "rank": 4,
+        "department": "Legal",
+        "bulletin": "massa",
+        "title": "praesent lectus vestibulum quam sapien varius",
+        "uploadDate": "2022-07-20",
+        "view": 1929
+    },
+    {
+        "id": 5,
+        "rank": 5,
+        "department": "Support",
+        "bulletin": "velit",
+        "title": "semper sapien a libero nam dui proin leo",
+        "uploadDate": "2023-05-30",
+        "view": 5564
+    },
+    {
+        "id": 6,
+        "rank": 6,
+        "department": "Legal",
+        "bulletin": "in lacus",
+        "title": "nisi eu orci mauris lacinia",
+        "uploadDate": "2023-05-03",
+        "view": 6950
+    },
+    {
+        "id": 7,
+        "rank": 7,
+        "department": "Services",
+        "bulletin": "nunc purus",
+        "title": "venenatis turpis enim blandit mi in",
+        "uploadDate": "2022-11-06",
+        "view": 503
+    },
+    {
+        "id": 8,
+        "rank": 8,
+        "department": "Engineering",
+        "bulletin": "suspendisse ornare",
+        "title": "nullam orci pede venenatis non sodales",
+        "uploadDate": "2022-12-18",
+        "view": 4322
+    },
+    {
+        "id": 9,
+        "rank": 9,
+        "department": "Business Development",
+        "bulletin": "lectus vestibulum",
+        "title": "bibendum imperdiet nullam orci pede venenatis non",
+        "uploadDate": "2023-01-18",
+        "view": 9103
+    },
+    {
+        "id": 10,
+        "rank": 10,
+        "department": "Engineering",
+        "bulletin": "rhoncus",
+        "title": "venenatis turpis enim blandit mi in porttitor",
+        "uploadDate": "2022-08-30",
+        "view": 2998
+    }
+]

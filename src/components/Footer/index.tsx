@@ -7,8 +7,8 @@ function Footer() {
             height={50}
             color={"white"}
             bgcolor={"#2a2a2a"}
-            position={"absolute"}
-            bottom={0}
+            // position={"absolute"}
+            // bottom={0}
         >
             <Typography
                 variant="subtitle2"
