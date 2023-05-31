@@ -1,13 +1,27 @@
-import { Box, Divider, Grid, Link, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import {
+    Box,
+    Divider,
+    Grid,
+    List,
+    ListItem,
+    ListItemIcon,
+} from "@mui/material";
 import MockHotArticleJson from "../../mock/HotArticle.json";
 import { Cell } from "../../components/Cell";
 import { useEffect, useRef, useState } from "react";
 import { ArticleItem } from "../../components/ArticleItem";
+import { Search } from "@mui/icons-material";
+import { Searchbar } from "../../components/Searchbar";
+import TitleSection from "../../components/TitleSection";
+import { HomeLayout } from "../../components/HomeLayout";
+import { ArticleTableHead } from "../../components/ArticleTableHead";
+import BulletinSection from "../../components/BulletinSection";
 
 export default function Home() {
     const [curItem, setCurItem] = useState(0);
     const timer = useRef<null | number>();
+    const [search, setSearch] = useState("");
+    const theadTitle = ["랭킹", "학과", "게시판", "제목", "날짜", "조회수"];
 
     useEffect(() => {
         if (timer.current) clearInterval(timer.current);
@@ -19,65 +33,10 @@ export default function Home() {
     }, []);
 
     return (
-        <Box
-            pt={2}
-            gap={1}
-            display={"flex"}
-            flexDirection={"column"}
-            alignItems={"center"}
-            minHeight={"100%"}
-            width={"80%"}
-            mx={"auto"}
-        >
-            <Box
-                display={"flex"}
-                flexDirection={"row"}
-                alignItems={"baseline"}
-                justifyContent={"space-between"}
-                width={"100%"}
-            >
-                <Typography
-                    variant="h5"
-                    component={"span"}
-                    fontWeight={600}
-                    fontFamily={"Noto Sans KR"}
-                >
-                    🔥 Hot 공지
-                </Typography>
-                <RouterLink to="/" style={{ textDecoration: "none" }}>
-                    <Link
-                        underline="none"
-                        sx={{
-                            color: "#b9b9b9",
-                            fontFamily: "Inter",
-                            fontSize: 15,
-                            fontWeight: 100,
-                            "&:hover": {
-                                textDecoration: "underline",
-                            },
-                        }}
-                        component={"span"}
-                    >
-                        더 보기
-                    </Link>
-                </RouterLink>
-            </Box>
+        <HomeLayout>
+            <TitleSection title={"🔥 Hot 공지"} link={"/"} />
             <Grid container width={"100%"}>
-                <Box
-                    flexDirection={"row"}
-                    display={"grid"}
-                    gridTemplateColumns={"5% 10% 10% auto 10% 7%"}
-                    gap={1}
-                    width={"100%"}
-                    px={1}
-                >
-                    <Cell>랭킹</Cell>
-                    <Cell>학과</Cell>
-                    <Cell>게시판</Cell>
-                    <Cell>제목</Cell>
-                    <Cell>날짜</Cell>
-                    <Cell>조회수</Cell>
-                </Box>
+                <ArticleTableHead items={theadTitle} />
             </Grid>
             <Divider sx={{ width: "100%" }} />
             <Grid container>
@@ -115,6 +74,31 @@ export default function Home() {
                     })}
                 </Box>
             </Grid>
-        </Box>
+            <Box
+                justifyContent={"center"}
+                alignItems={"center"}
+                width={"50%"}
+                py={2}
+                mx={"auto"}
+            >
+                <List>
+                    <ListItem
+                        sx={{ border: "1px solid black", borderRadius: "20px" }}
+                    >
+                        <ListItemIcon>
+                            <Search />
+                        </ListItemIcon>
+                        <Searchbar
+                            value={search}
+                            placeholder="학과 검색"
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                    </ListItem>
+                </List>
+            </Box>
+            <TitleSection title="게시판" link="/" />
+            <Divider sx={{ width: "100%" }} />
+            <BulletinSection />
+        </HomeLayout>
     );
 }

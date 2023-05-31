@@ -1,14 +1,20 @@
 import styled from "@emotion/styled";
+import React from "react";
 
-type CellAlignType = {
-    jc?: "left" | "center" | 'right"';
+type CellType = {
+    children: React.ReactNode;
+    jc?: "left" | "center" | "right";
 };
 
-export const Cell = styled.div`
+export const Cell = ({ children, jc = "center" }: CellType) => {
+    return <Container jc={jc}>{children}</Container>;
+};
+
+const Container = styled.div<Pick<CellType, "jc">>`
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: ${({ jc = "center" }: CellAlignType) => jc};
+    justify-content: ${({ jc }) => jc};
     align-items: center;
     font-size: 15px;
     position: relative;
