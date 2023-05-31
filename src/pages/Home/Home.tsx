@@ -2,28 +2,39 @@ import { Box, Divider, Grid, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import MockHotArticleJson from "../../mock/HotArticle.json";
 import { Cell } from "../../components/Cell";
+import { useEffect, useRef, useState } from "react";
+import { ArticleItem } from "../../components/ArticleItem";
 
 export default function Home() {
+    const [curItem, setCurItem] = useState(0);
+    const timer = useRef<null | number>();
+
+    useEffect(() => {
+        if (timer.current) clearInterval(timer.current);
+        timer.current = setInterval(() => {
+            setCurItem((prev) => {
+                return prev === 9 ? 0 : prev + 1;
+            });
+        }, 2000);
+    }, []);
+
     return (
-        <Grid
-            container
-            alignItems={"center"}
+        <Box
             pt={2}
             gap={1}
-            direction={"column"}
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"center"}
             minHeight={"100%"}
-            sm={8}
-            xs={12}
+            width={"80%"}
             mx={"auto"}
         >
-            <Grid
-                container
-                direction={"row"}
-                // display={"flex"}
+            <Box
+                display={"flex"}
+                flexDirection={"row"}
                 alignItems={"baseline"}
                 justifyContent={"space-between"}
                 width={"100%"}
-                mb={2}
             >
                 <Typography
                     variant="h5"
@@ -50,7 +61,7 @@ export default function Home() {
                         더 보기
                     </Link>
                 </RouterLink>
-            </Grid>
+            </Box>
             <Grid container width={"100%"}>
                 <Box
                     flexDirection={"row"}
@@ -58,25 +69,14 @@ export default function Home() {
                     gridTemplateColumns={"5% 10% 10% auto 10% 7%"}
                     gap={1}
                     width={"100%"}
+                    px={1}
                 >
-                    <Box textAlign={"center"} fontSize={15}>
-                        랭킹
-                    </Box>
-                    <Box textAlign={"center"} fontSize={15}>
-                        학과
-                    </Box>
-                    <Box textAlign={"center"} fontSize={15}>
-                        게시판
-                    </Box>
-                    <Box textAlign={"center"} fontSize={15}>
-                        제목
-                    </Box>
-                    <Box textAlign={"center"} fontSize={15}>
-                        날짜
-                    </Box>
-                    <Box textAlign={"center"} fontSize={15}>
-                        조회수
-                    </Box>
+                    <Cell>랭킹</Cell>
+                    <Cell>학과</Cell>
+                    <Cell>게시판</Cell>
+                    <Cell>제목</Cell>
+                    <Cell>날짜</Cell>
+                    <Cell>조회수</Cell>
                 </Box>
             </Grid>
             <Divider sx={{ width: "100%" }} />
@@ -86,8 +86,11 @@ export default function Home() {
                     display={"flex"}
                     flexDirection={"column"}
                     gap={1}
-                    overflow={"hidden"}
+                    height={57.3}
                     px={1}
+                    sx={{
+                        overflow: "hidden",
+                    }}
                 >
                     {MockHotArticleJson.map((props) => {
                         const {
@@ -100,33 +103,18 @@ export default function Home() {
                             view,
                         } = props;
                         return (
-                            <Box
-                                flexDirection={"row"}
-                                display={"grid"}
-                                gridTemplateColumns={"5% 10% 10% auto 10% 7%"}
-                                width={"100%"}
-                                key={id}
-                                border={"0.5px solid #ccc"}
-                                sx={{
-                                    borderRadius: "10px",
-                                    "&:hover": {
-                                        cursor: "pointer",
-                                        bgcolor: "#ccc",
-                                    },
-                                }}
-                                py={2}
-                            >
+                            <ArticleItem key={id} current={curItem}>
                                 <Cell>{rank}</Cell>
-                                <Cell>{department}</Cell>
-                                <Cell>{bulletin}</Cell>
+                                <Cell jc={"left"}>{department}</Cell>
+                                <Cell jc={"left"}>{bulletin}</Cell>
                                 <Cell jc={"left"}>{title}</Cell>
                                 <Cell>{uploadDate}</Cell>
                                 <Cell>{view}</Cell>
-                            </Box>
+                            </ArticleItem>
                         );
                     })}
                 </Box>
             </Grid>
-        </Grid>
+        </Box>
     );
 }
