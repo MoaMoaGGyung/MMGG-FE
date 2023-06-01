@@ -33,7 +33,7 @@ function Header() {
                             textAlign: "center",
                             color: "#464646",
                             fontFamily: "Bruno Ace SC, cursive",
-                            fontSize: 40,
+                            fontSize: "clamp(1rem, 3vw, 2rem)",
                         }}
                     >
                         CNU NOTICE HUB
