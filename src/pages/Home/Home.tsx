@@ -89,7 +89,7 @@ export default function Home() {
                     </ListItem>
                 </List>
             </Box>
-            <TitleSection title="게시판" link="/" />
+            <TitleSection title="게시판" />
             <Divider sx={{ width: "100%" }} />
             <BulletinSection keyword={search} />
         </HomeLayout>
