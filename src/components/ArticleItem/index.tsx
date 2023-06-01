@@ -18,6 +18,8 @@ export const ArticleItem = styled.div`
         cursor: pointer;
         background-color: #ccc;
     }
-    transform: translateY(-${({ current }: CurArticleNum) => current * 57.3}px);
-    transition: transform 0.5s ease;
+    transform: translateY(
+        -${({ current }: CurArticleNum) => current * 57.3333}px
+    );
+    transition: transform 0.5s ease-in-out;
 `;

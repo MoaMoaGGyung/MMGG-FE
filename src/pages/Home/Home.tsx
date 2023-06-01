@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import MockHotArticleJson from "../../mock/HotArticle.json";
 import { Cell } from "../../components/Cell";
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ArticleItem } from "../../components/ArticleItem";
 import { Search } from "@mui/icons-material";
 import { Searchbar } from "../../components/Searchbar";
@@ -22,6 +22,10 @@ export default function Home() {
     const timer = useRef<null | number>();
     const [search, setSearch] = useState("");
     const theadTitle = ["랭킹", "학과", "게시판", "제목", "날짜", "조회수"];
+
+    const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    };
 
     useEffect(() => {
         if (timer.current) clearInterval(timer.current);
@@ -91,14 +95,14 @@ export default function Home() {
                         <Searchbar
                             value={search}
                             placeholder="학과 검색"
-                            onChange={(e) => setSearch(e.target.value)}
+                            onChange={handleSearch}
                         />
                     </ListItem>
                 </List>
             </Box>
             <TitleSection title="게시판" link="/" />
             <Divider sx={{ width: "100%" }} />
-            <BulletinSection />
+            <BulletinSection keyword={search} />
         </HomeLayout>
     );
 }

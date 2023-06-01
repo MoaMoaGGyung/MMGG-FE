@@ -11,8 +11,8 @@ export const Cell = ({ children, jc = "center" }: CellType) => {
 };
 
 const Container = styled.div<Pick<CellType, "jc">>`
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    /* height: 100%; */
     display: flex;
     justify-content: ${({ jc }) => jc};
     align-items: center;
