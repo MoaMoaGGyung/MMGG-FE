@@ -1,14 +1,19 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, TypographyProps } from "@mui/material";
 import { CustomLink } from "../CustomLink";
 import React from "react";
 
-type TitleSectionType = {
+interface TitleSectionType extends TypographyProps {
     title: string;
-    link: string;
-    isMore?: boolean;
-};
+    link?: string;
+    linkLabel?: string;
+}
 
-const TitleSection = ({ title, link, isMore = true }: TitleSectionType) => {
+const TitleSection = ({
+    title,
+    link,
+    linkLabel = "더 보기",
+    variant = "h5",
+}: TitleSectionType) => {
     return (
         <Box
             display={"flex"}
@@ -18,14 +23,14 @@ const TitleSection = ({ title, link, isMore = true }: TitleSectionType) => {
             width={"100%"}
         >
             <Typography
-                variant="h5"
+                variant={variant}
                 component={"span"}
                 fontWeight={600}
                 fontFamily={"Noto Sans KR"}
             >
                 {title}
             </Typography>
-            {isMore && <CustomLink to={link}>더 보기</CustomLink>}
+            {link && <CustomLink to={link}>{linkLabel}</CustomLink>}
         </Box>
     );
 };

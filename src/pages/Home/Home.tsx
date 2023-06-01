@@ -1,15 +1,8 @@
-import {
-    Box,
-    Divider,
-    Grid,
-    List,
-    ListItem,
-    ListItemIcon,
-} from "@mui/material";
+import { Box, Divider, List, ListItem, ListItemIcon } from "@mui/material";
 import MockHotArticleJson from "../../mock/HotArticle.json";
 import { Cell } from "../../components/Cell";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { ArticleItem } from "../../components/ArticleItem";
+import ArticleItem from "../../components/ArticleItem";
 import { Search } from "@mui/icons-material";
 import { Searchbar } from "../../components/Searchbar";
 import TitleSection from "../../components/TitleSection";
@@ -38,46 +31,42 @@ export default function Home() {
 
     return (
         <HomeLayout>
-            <TitleSection title={"🔥 Hot 공지"} link={"/"} />
-            <Grid container width={"100%"}>
-                <ArticleTableHead items={theadTitle} />
-            </Grid>
+            <TitleSection title={"🔥 일일 Hot 공지"} link={"/hot"} />
             <Divider sx={{ width: "100%" }} />
-            <Grid container>
-                <Box
-                    width={"100%"}
-                    display={"flex"}
-                    flexDirection={"column"}
-                    gap={1}
-                    height={57.3}
-                    px={1}
-                    sx={{
-                        overflow: "hidden",
-                    }}
-                >
-                    {MockHotArticleJson.map((props) => {
-                        const {
-                            id,
-                            rank,
-                            department,
-                            bulletin,
-                            title,
-                            uploadDate,
-                            view,
-                        } = props;
-                        return (
-                            <ArticleItem key={id} current={curItem}>
-                                <Cell>{rank}</Cell>
-                                <Cell jc={"left"}>{department}</Cell>
-                                <Cell jc={"left"}>{bulletin}</Cell>
-                                <Cell jc={"left"}>{title}</Cell>
-                                <Cell>{uploadDate}</Cell>
-                                <Cell>{view}</Cell>
-                            </ArticleItem>
-                        );
-                    })}
-                </Box>
-            </Grid>
+            <ArticleTableHead items={theadTitle} />
+            <Box
+                width={"100%"}
+                display={"flex"}
+                flexDirection={"column"}
+                gap={1}
+                height={57.3}
+                px={1}
+                sx={{
+                    overflow: "hidden",
+                }}
+            >
+                {MockHotArticleJson.map((props) => {
+                    const {
+                        id,
+                        rank,
+                        department,
+                        bulletin,
+                        title,
+                        uploadDate,
+                        view,
+                    } = props;
+                    return (
+                        <ArticleItem key={id} current={curItem}>
+                            <Cell>{rank}</Cell>
+                            <Cell jc={"left"}>{department}</Cell>
+                            <Cell jc={"left"}>{bulletin}</Cell>
+                            <Cell jc={"left"}>{title}</Cell>
+                            <Cell>{uploadDate}</Cell>
+                            <Cell>{view}</Cell>
+                        </ArticleItem>
+                    );
+                })}
+            </Box>
             <Box
                 justifyContent={"center"}
                 alignItems={"center"}
