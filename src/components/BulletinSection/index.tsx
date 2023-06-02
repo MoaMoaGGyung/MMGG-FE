@@ -48,6 +48,7 @@ const BulletinSection = ({ keyword }: BulletinSectionType) => {
                                         최근 게시물
                                     </Typography>
                                 </Stack>
+                                <Divider sx={{ width: "100%" }} />
                                 <Stack direction={"column"} spacing={1} py={2}>
                                     {recent_posts.map(
                                         ({ title, link }, index) => {
