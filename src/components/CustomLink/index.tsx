@@ -1,14 +1,15 @@
 import styled from "@emotion/styled";
+import { LinkBaseProps } from "@mui/material";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
-type CustomLinkType = {
+interface CustomLinkType extends LinkBaseProps {
     to: string;
     size?: string | number;
     fontWeight?: number;
     color?: string;
     children: ReactNode | string;
-};
+}
 
 const Container = styled(Link)<{
     color: string;

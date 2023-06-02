@@ -1,12 +1,12 @@
-import { Box, Divider, List, ListItem, ListItemIcon } from "@mui/material";
 import MockHotArticleJson from "../../mock/HotArticle.json";
+import { Box, Divider, List, ListItem, ListItemIcon } from "@mui/material";
 import { Cell } from "../../components/Cell";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import ArticleItem from "../../components/ArticleItem";
-import { Search } from "@mui/icons-material";
+import { ArrowDropUp, Search } from "@mui/icons-material";
 import { Searchbar } from "../../components/Searchbar";
 import TitleSection from "../../components/TitleSection";
-import { HomeLayout } from "../../components/HomeLayout";
+import HomeLayout from "../../components/HomeLayout";
 import { ArticleTableHead } from "../../components/ArticleTableHead";
 import BulletinSection from "../../components/BulletinSection";
 
@@ -14,7 +14,14 @@ export default function Home() {
     const [curItem, setCurItem] = useState(0);
     const timer = useRef<null | number>();
     const [search, setSearch] = useState("");
-    const theadTitle = ["랭킹", "학과", "게시판", "제목", "날짜", "조회수"];
+    const theadTitle = [
+        "랭킹",
+        "학과",
+        "게시판",
+        "제목",
+        "날짜",
+        "일일 변동량",
+    ];
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -33,7 +40,7 @@ export default function Home() {
         <HomeLayout>
             <TitleSection title={"🔥 일일 Hot 공지"} link={"/hot"} />
             <Divider sx={{ width: "100%" }} />
-            <ArticleTableHead items={theadTitle} />
+            <ArticleTableHead gtc="5% 10% 10% auto 10% 7%" items={theadTitle} />
             <Box
                 width={"100%"}
                 display={"flex"}
@@ -45,24 +52,31 @@ export default function Home() {
                     overflow: "hidden",
                 }}
             >
-                {MockHotArticleJson.map((props) => {
+                {MockHotArticleJson.sort(
+                    (a, b) => b.dailyFluctuation - a.dailyFluctuation
+                ).map((props, index) => {
                     const {
-                        id,
-                        rank,
                         department,
                         bulletin,
                         title,
                         uploadDate,
-                        view,
+                        dailyFluctuation,
                     } = props;
                     return (
-                        <ArticleItem key={id} current={curItem}>
-                            <Cell>{rank}</Cell>
+                        <ArticleItem
+                            key={index}
+                            current={curItem}
+                            gtc="5% 10% 10% auto 10% 7%"
+                        >
+                            <Cell>{index + 1}</Cell>
                             <Cell jc={"left"}>{department}</Cell>
                             <Cell jc={"left"}>{bulletin}</Cell>
                             <Cell jc={"left"}>{title}</Cell>
                             <Cell>{uploadDate}</Cell>
-                            <Cell>{view}</Cell>
+                            <Cell>
+                                <ArrowDropUp sx={{ color: "red" }} />{" "}
+                                {dailyFluctuation}
+                            </Cell>
                         </ArticleItem>
                     );
                 })}

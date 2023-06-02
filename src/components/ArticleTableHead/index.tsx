@@ -3,14 +3,15 @@ import { Cell } from "../Cell";
 
 type ArticleTableHeadType = {
     items: string[];
+    gtc: string;
 };
 
-export const ArticleTableHead = ({ items }: ArticleTableHeadType) => {
+export const ArticleTableHead = ({ items, gtc }: ArticleTableHeadType) => {
     return (
         <Box
             flexDirection={"row"}
             display={"grid"}
-            gridTemplateColumns={"5% 10% 10% auto 10% 7%"}
+            gridTemplateColumns={gtc}
             gap={1}
             width={"100%"}
             px={1}

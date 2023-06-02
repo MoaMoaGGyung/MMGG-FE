@@ -5,7 +5,7 @@ type HomeLayoutType = {
     children: React.ReactNode;
 };
 
-export const HomeLayout = ({ children }: HomeLayoutType) => {
+const HomeLayout = ({ children }: HomeLayoutType) => {
     return (
         <Box
             py={2}
@@ -21,3 +21,5 @@ export const HomeLayout = ({ children }: HomeLayoutType) => {
         </Box>
     );
 };
+
+export default HomeLayout;
