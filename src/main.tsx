@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        errorElement: <div>404 Not Found</div>,
+        // errorElement: <div>404 Not Found</div>,
         children: [
             {
                 path: "/",
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
                 element: <HotArticles />,
             },
             {
-                path: "/:bulletin",
+                path: "/board/:id",
                 element: <Bulletin />,
             },
         ],

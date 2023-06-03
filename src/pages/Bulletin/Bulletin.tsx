@@ -1,5 +1,4 @@
 import MockDepartmentBulletin from "../../mock/DepartmentBulletin.json";
-import { useParams } from "react-router-dom";
 import HomeLayout from "../../components/HomeLayout";
 import TitleSection from "../../components/TitleSection";
 import {
@@ -10,7 +9,7 @@ import {
     Typography,
     Divider,
 } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Cell } from "../../components/Cell";
 import { ArticleTableHead } from "../../components/ArticleTableHead";
 import ArticleItem from "../../components/ArticleItem";
@@ -18,12 +17,15 @@ import ArticleItem from "../../components/ArticleItem";
 type AlignmentType = "recent" | "view" | "past";
 
 const Bulletin = () => {
-    const { bulletin } = useParams();
-    const { boards } = MockDepartmentBulletin;
+    const { department, boards } = MockDepartmentBulletin;
     const [alignment, setAlignment] = useState<AlignmentType>("recent");
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setAlignment(e.target.value as AlignmentType);
     };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <HomeLayout>
@@ -32,7 +34,7 @@ const Bulletin = () => {
                 justifyContent={"space-between"}
                 width={"100%"}
             >
-                <TitleSection title={bulletin ? bulletin : ""} variant="h4" />
+                <TitleSection title={department.name} variant="h4" />
                 <Box width={130}>
                     <TextField
                         select

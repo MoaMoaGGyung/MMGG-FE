@@ -28,6 +28,7 @@ export default function Home() {
     };
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         if (timer.current) clearInterval(timer.current);
         timer.current = setInterval(() => {
             setCurItem((prev) => {
@@ -57,7 +58,7 @@ export default function Home() {
                 ).map((props, index) => {
                     const {
                         department,
-                        bulletin,
+                        board,
                         title,
                         uploadDate,
                         dailyFluctuation,
@@ -70,7 +71,7 @@ export default function Home() {
                         >
                             <Cell>{index + 1}</Cell>
                             <Cell jc={"left"}>{department}</Cell>
-                            <Cell jc={"left"}>{bulletin}</Cell>
+                            <Cell jc={"left"}>{board}</Cell>
                             <Cell jc={"left"}>{title}</Cell>
                             <Cell>{uploadDate}</Cell>
                             <Cell>

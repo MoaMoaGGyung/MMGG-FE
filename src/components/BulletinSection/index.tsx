@@ -18,20 +18,20 @@ type BulletinSectionType = {
 const BulletinSection = ({ keyword }: BulletinSectionType) => {
     const boards = keyword
         ? MockRecentPosts.filter(
-              ({ board }) => board.name.indexOf(keyword) > -1
+              ({ department }) => department.name.indexOf(keyword) > -1
           )
         : MockRecentPosts;
     return (
         <Grid container spacing={2}>
-            {boards.map(({ board, recent_posts }, index) => {
-                const { name, alias } = board;
+            {boards.map(({ department, recent_posts }, index) => {
+                const { name, id } = department;
                 return (
                     <Grid item lg={4} md={6} sm={12} key={index}>
                         <Card>
                             <CardContent>
                                 <Stack direction={"column"} spacing={1}>
                                     <CustomLink
-                                        to={`/${alias}`}
+                                        to={`/board/${id}`}
                                         color={"black"}
                                         fontWeight={700}
                                         size={"30px"}
