@@ -3,6 +3,7 @@
     "boards": [
         {
             "name": "fermentum",
+            "id": 89,
             "articles": [
                 {
                     "index": 2017,
@@ -50,6 +51,7 @@
         },
         {
             "name": "nibh",
+            "id": 73,
             "articles": [
                 {
                     "index": 9565,
@@ -97,6 +99,7 @@
         },
         {
             "name": "est",
+            "id": 12,
             "articles": [
                 {
                     "index": 5166,
@@ -144,6 +147,7 @@
         },
         {
             "name": "ultrices",
+            "id": 36,
             "articles": [
                 {
                     "index": 5900,

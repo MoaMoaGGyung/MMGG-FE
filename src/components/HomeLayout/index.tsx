@@ -1,11 +1,11 @@
-import { Box } from "@mui/material";
+import { Box, BoxProps } from "@mui/material";
 import React from "react";
 
-type HomeLayoutType = {
+interface HomeLayoutType extends BoxProps {
     children: React.ReactNode;
-};
+}
 
-const HomeLayout = ({ children }: HomeLayoutType) => {
+const HomeLayout = ({ children, ...props }: HomeLayoutType) => {
     return (
         <Box
             py={2}
@@ -16,6 +16,7 @@ const HomeLayout = ({ children }: HomeLayoutType) => {
             minHeight={"100%"}
             width={"80%"}
             mx={"auto"}
+            {...props}
         >
             {children}
         </Box>

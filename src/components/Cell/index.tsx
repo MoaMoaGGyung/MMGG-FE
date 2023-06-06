@@ -1,37 +1,31 @@
-import styled from "@emotion/styled";
+import { Box, BoxProps } from "@mui/material";
 import React from "react";
 
-type CellType = {
+interface CellType extends BoxProps {
     children: React.ReactNode;
-    jc?: "left" | "center" | "right";
+}
+
+const Cell = ({ children, sx, component, ...rest }: CellType) => {
+    return (
+        <Box
+            component={component}
+            sx={Object.assign(
+                {
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "15px",
+                    position: "relative",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                },
+                sx
+            )}
+            {...rest}
+        >
+            {children}
+        </Box>
+    );
 };
 
-export const Cell = ({ children, jc = "center" }: CellType) => {
-    return <Container jc={jc}>{children}</Container>;
-};
-
-const Container = styled.div<Pick<CellType, "jc">>`
-    /* width: 100%; */
-    /* height: 100%; */
-    display: flex;
-    justify-content: ${({ jc }) => jc};
-    align-items: center;
-    font-size: 15px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-    // 넘어가는 부분을 흐리게 처리합니다.
-    /* &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        width: 20px;
-        background: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0),
-            rgba(255, 255, 255, 1) 80%
-        );
-    } */
-`;
+export default Cell;

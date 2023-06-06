@@ -2,9 +2,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home/Home.tsx";
-import HotArticles from "./pages/HotArticles/HotArticles.tsx";
-import Bulletin from "./pages/Bulletin/Bulletin.tsx";
+import Home from "./pages/Home";
+import HotArticles from "./pages/HotArticles";
+import Department from "./pages/Department";
+import Board from "./pages/Board";
+import Detail from "./pages/Detail";
 
 const router = createBrowserRouter([
     {
@@ -21,8 +23,18 @@ const router = createBrowserRouter([
                 element: <HotArticles />,
             },
             {
-                path: "/board/:id",
-                element: <Bulletin />,
+                path: "/department",
+                element: <Detail />,
+                children: [
+                    {
+                        path: "/department/:dId",
+                        element: <Department />,
+                    },
+                    {
+                        path: "/department/:dId/board/:bId",
+                        element: <Board />,
+                    },
+                ],
             },
         ],
     },

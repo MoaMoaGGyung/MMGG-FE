@@ -1,17 +1,19 @@
 import { Box, Typography, TypographyProps } from "@mui/material";
-import { CustomLink } from "../CustomLink";
+import CustomLink from "../CustomLink";
 import React from "react";
 
 interface TitleSectionType extends TypographyProps {
     title: string;
     link?: string;
     linkLabel?: string;
+    onLinkClicked?: () => void;
 }
 
 const TitleSection = ({
     title,
     link,
-    linkLabel = "더 보기",
+    linkLabel,
+    onLinkClicked,
     variant = "h5",
 }: TitleSectionType) => {
     return (
@@ -30,7 +32,11 @@ const TitleSection = ({
             >
                 {title}
             </Typography>
-            {link && <CustomLink to={link}>{linkLabel}</CustomLink>}
+            {link && (
+                <CustomLink to={link} onLinkClicked={onLinkClicked}>
+                    {linkLabel}
+                </CustomLink>
+            )}
         </Box>
     );
 };

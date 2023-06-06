@@ -19,7 +19,7 @@ function ArticleItem({
     );
 }
 
-export const Container = styled.div<CurArticleType>`
+const Container = styled.div<CurArticleType>`
     width: 100%;
     flex-direction: row;
     display: grid;

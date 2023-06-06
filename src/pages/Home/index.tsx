@@ -1,13 +1,20 @@
 import MockHotArticleJson from "../../mock/HotArticle.json";
-import { Box, Divider, List, ListItem, ListItemIcon } from "@mui/material";
-import { Cell } from "../../components/Cell";
+import {
+    Box,
+    Divider,
+    List,
+    ListItem,
+    ListItemIcon,
+    Stack,
+} from "@mui/material";
+import Cell from "../../components/Cell";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import ArticleItem from "../../components/ArticleItem";
 import { ArrowDropUp, Search } from "@mui/icons-material";
-import { Searchbar } from "../../components/Searchbar";
+import Searchbar from "../../components/Searchbar";
 import TitleSection from "../../components/TitleSection";
 import HomeLayout from "../../components/HomeLayout";
-import { ArticleTableHead } from "../../components/ArticleTableHead";
+import ArticleTableHead from "../../components/ArticleTableHead";
 import BulletinSection from "../../components/BulletinSection";
 
 export default function Home() {
@@ -39,7 +46,11 @@ export default function Home() {
 
     return (
         <HomeLayout>
-            <TitleSection title={"🔥 일일 Hot 공지"} link={"/hot"} />
+            <TitleSection
+                title={"🔥 일일 Hot 공지"}
+                link={"/hot"}
+                linkLabel="더 보기"
+            />
             <Divider sx={{ width: "100%" }} />
             <ArticleTableHead gtc="5% 10% 10% auto 10% 7%" items={theadTitle} />
             <Box
@@ -70,9 +81,11 @@ export default function Home() {
                             gtc="5% 10% 10% auto 10% 7%"
                         >
                             <Cell>{index + 1}</Cell>
-                            <Cell jc={"left"}>{department}</Cell>
-                            <Cell jc={"left"}>{board}</Cell>
-                            <Cell jc={"left"}>{title}</Cell>
+                            <Cell sx={{ justifyContent: "left" }}>
+                                {department}
+                            </Cell>
+                            <Cell sx={{ justifyContent: "left" }}>{board}</Cell>
+                            <Cell sx={{ justifyContent: "left" }}>{title}</Cell>
                             <Cell>{uploadDate}</Cell>
                             <Cell>
                                 <ArrowDropUp sx={{ color: "red" }} />{" "}
@@ -104,9 +117,11 @@ export default function Home() {
                     </ListItem>
                 </List>
             </Box>
-            <TitleSection title="게시판" />
-            <Divider sx={{ width: "100%" }} />
-            <BulletinSection keyword={search} />
+            <Stack direction={"column"} rowGap={2}>
+                <TitleSection title="📄 게시판" />
+                <Divider sx={{ width: "100%" }} />
+                <BulletinSection keyword={search} />
+            </Stack>
         </HomeLayout>
     );
 }

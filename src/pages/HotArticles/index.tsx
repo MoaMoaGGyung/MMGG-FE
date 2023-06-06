@@ -1,11 +1,11 @@
 import { Divider } from "@mui/material";
-import { ArticleTableHead } from "../../components/ArticleTableHead";
+import ArticleTableHead from "../../components/ArticleTableHead";
 import HomeLayout from "../../components/HomeLayout";
 import TitleSection from "../../components/TitleSection";
 import MockHotArticleJson from "../../mock/HotArticle.json";
 import { Box } from "@mui/system";
 import ArticleItem from "../../components/ArticleItem";
-import { Cell } from "../../components/Cell";
+import Cell from "../../components/Cell";
 import { ArrowDropUp } from "@mui/icons-material";
 
 function HotArticles() {
@@ -19,11 +19,7 @@ function HotArticles() {
     ];
     return (
         <HomeLayout>
-            <TitleSection
-                title={"🔥 일일 Hot 공지"}
-                link="/"
-                linkLabel="홈으로"
-            />
+            <TitleSection title={"🔥 일일 Hot 공지"} />
             <Divider sx={{ width: "100%" }} />
             <ArticleTableHead items={theadTitle} gtc="5% 10% 10% auto 10% 7%" />
             <Box
@@ -38,7 +34,7 @@ function HotArticles() {
                 ).map((props, index) => {
                     const {
                         department,
-                        bulletin,
+                        board,
                         title,
                         uploadDate,
                         dailyFluctuation,
@@ -46,9 +42,11 @@ function HotArticles() {
                     return (
                         <ArticleItem key={index} gtc="5% 10% 10% auto 10% 7%">
                             <Cell>{index + 1}</Cell>
-                            <Cell jc={"left"}>{department}</Cell>
-                            <Cell jc={"left"}>{bulletin}</Cell>
-                            <Cell jc={"left"}>{title}</Cell>
+                            <Cell sx={{ justifyContent: "left" }}>
+                                {department}
+                            </Cell>
+                            <Cell sx={{ justifyContent: "left" }}>{board}</Cell>
+                            <Cell sx={{ justifyContent: "left" }}>{title}</Cell>
                             <Cell>{uploadDate}</Cell>
                             <Cell>
                                 <ArrowDropUp sx={{ color: "red" }} />{" "}

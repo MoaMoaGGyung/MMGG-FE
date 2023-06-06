@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
-import { Cell } from "../Cell";
+import Cell from "../Cell";
 
 type ArticleTableHeadType = {
     items: string[];
     gtc: string;
 };
 
-export const ArticleTableHead = ({ items, gtc }: ArticleTableHeadType) => {
+const ArticleTableHead = ({ items, gtc }: ArticleTableHeadType) => {
     return (
         <Box
             flexDirection={"row"}
@@ -22,3 +22,5 @@ export const ArticleTableHead = ({ items, gtc }: ArticleTableHeadType) => {
         </Box>
     );
 };
+
+export default ArticleTableHead;
