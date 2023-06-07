@@ -20,6 +20,7 @@ const CustomLink = ({
         <Box
             sx={Object.assign(
                 {
+                    width: "fit-content",
                     color: "#b2b2b2",
                     fontWeight: 300,
                     fontSize: "20px",
