@@ -1,8 +1,6 @@
 import HomeLayout from "../../components/HomeLayout";
 import {
     Stack,
-    Box,
-    TextField,
     MenuItem,
     Typography,
     Divider,
@@ -10,6 +8,8 @@ import {
     FormControl,
     FormControlLabel,
     Radio,
+    Select,
+    SelectChangeEvent,
 } from "@mui/material";
 import { ChangeEvent, useEffect } from "react";
 import { Outlet, useParams } from "react-router-dom";
@@ -29,7 +29,7 @@ const Detail = () => {
     const { dId } = useParams();
     const [alignment, setAlignment] = useRecoilState(alignmentTypeState);
     const [dir, setDir] = useRecoilState(alignmentDirectionState);
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: SelectChangeEvent<string>) => {
         setAlignment((_) => e.target.value as AlignmentType);
     };
 
@@ -62,52 +62,86 @@ const Detail = () => {
                     </Typography>
                 </CustomLink>
                 <Stack direction={"row"} spacing={1}>
-                    <Box width={130}>
-                        <TextField
-                            select
+                    <FormControl size="small">
+                        <Select
                             value={alignment}
                             onChange={handleChange}
-                            size="small"
-                            fullWidth
+                            sx={{ width: "fit-content" }}
                         >
                             <MenuItem value="date">
-                                <Typography variant="subtitle2">
+                                <div
+                                    style={{
+                                        fontFamily: "Noto Sans KR",
+                                        fontSize: 15,
+                                        fontWeight: 300,
+                                    }}
+                                >
                                     날짜순
-                                </Typography>
+                                </div>
                             </MenuItem>
                             <MenuItem value="view">
-                                <Typography variant="subtitle2">
+                                <div
+                                    style={{
+                                        fontFamily: "Noto Sans KR",
+                                        fontSize: 15,
+                                        fontWeight: 300,
+                                    }}
+                                >
                                     조회수순
-                                </Typography>
+                                </div>
                             </MenuItem>
                             <MenuItem value="index">
-                                <Typography variant="subtitle2">
+                                <div
+                                    style={{
+                                        fontFamily: "Noto Sans KR",
+                                        fontSize: 15,
+                                        fontWeight: 300,
+                                    }}
+                                >
                                     번호순
-                                </Typography>
+                                </div>
                             </MenuItem>
-                        </TextField>
-                    </Box>
-                    <Box>
-                        <FormControl>
-                            <RadioGroup
-                                name="alignment-direction"
-                                value={dir}
-                                onChange={handleRadioChange}
-                                row
-                            >
-                                <FormControlLabel
-                                    control={<Radio size="small" />}
-                                    label="오름차순"
-                                    value={1}
-                                />
-                                <FormControlLabel
-                                    control={<Radio size="small" />}
-                                    label="내림차순"
-                                    value={-1}
-                                />
-                            </RadioGroup>
-                        </FormControl>
-                    </Box>
+                        </Select>
+                    </FormControl>
+                    <FormControl>
+                        <RadioGroup
+                            name="alignment-direction"
+                            value={dir}
+                            onChange={handleRadioChange}
+                            row
+                        >
+                            <FormControlLabel
+                                control={<Radio size="small" />}
+                                label={
+                                    <div
+                                        style={{
+                                            fontFamily: "Noto Sans KR",
+                                            fontSize: 15,
+                                            fontWeight: 300,
+                                        }}
+                                    >
+                                        오름차순
+                                    </div>
+                                }
+                                value={1}
+                            />
+                            <FormControlLabel
+                                control={<Radio size="small" />}
+                                label={
+                                    <div
+                                        style={{
+                                            fontFamily: "Noto Sans KR",
+                                            fontSize: 15,
+                                            fontWeight: 300,
+                                        }}
+                                    >
+                                        내림차순
+                                    </div>
+                                }
+                                value={-1}
+                            />
+                        </RadioGroup>
+                    </FormControl>
                 </Stack>
             </Stack>
             <Divider sx={{ width: "100%" }} />

@@ -7,7 +7,7 @@ export const alignmentTypeState = atom({
 
 export const alignmentDirectionState = atom({
     key: 'alignmentDirection',
-    default: 1
+    default: -1
 })
 
 export const alignmentState = selector({
