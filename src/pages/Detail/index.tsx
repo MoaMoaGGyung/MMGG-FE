@@ -12,7 +12,7 @@ import {
     SelectChangeEvent,
 } from "@mui/material";
 import { ChangeEvent, useEffect } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams, useSearchParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
     alignmentDirectionState,
@@ -21,7 +21,7 @@ import {
 } from "../../store/store";
 import CustomLink from "../../components/CustomLink";
 
-type AlignmentType = "date" | "past" | "index";
+type AlignmentType = "date" | "view";
 type AlignmentDirectionType = 1 | -1;
 
 const Detail = () => {
@@ -36,8 +36,6 @@ const Detail = () => {
     const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
         setDir(parseInt(e.target.value) as AlignmentDirectionType);
     };
-
-    console.log({ alignment, dir });
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -66,7 +64,7 @@ const Detail = () => {
                         <Select
                             value={alignment}
                             onChange={handleChange}
-                            sx={{ width: "fit-content" }}
+                            sx={{ width: "fit-content", borderRadius: 15 }}
                         >
                             <MenuItem value="date">
                                 <div
@@ -88,17 +86,6 @@ const Detail = () => {
                                     }}
                                 >
                                     조회수순
-                                </div>
-                            </MenuItem>
-                            <MenuItem value="index">
-                                <div
-                                    style={{
-                                        fontFamily: "Noto Sans KR",
-                                        fontSize: 15,
-                                        fontWeight: 300,
-                                    }}
-                                >
-                                    번호순
                                 </div>
                             </MenuItem>
                         </Select>

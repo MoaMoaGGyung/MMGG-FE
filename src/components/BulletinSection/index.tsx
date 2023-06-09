@@ -70,7 +70,7 @@ const BulletinSection = ({ keyword }: BulletinSectionType) => {
                                     sx={{ margin: 0, padding: "16px 0" }}
                                 >
                                     {recent_posts.map(
-                                        ({ title, link }, index) => {
+                                        ({ title, dId, bId, pId }, index) => {
                                             return (
                                                 <Cell
                                                     key={index}
@@ -82,7 +82,7 @@ const BulletinSection = ({ keyword }: BulletinSectionType) => {
                                                     // component={"li"}
                                                 >
                                                     <CustomLink
-                                                        to={link}
+                                                        to={`/department/${dId}/board/${bId}/post/${pId}`}
                                                         sx={{
                                                             color: "black",
                                                         }}

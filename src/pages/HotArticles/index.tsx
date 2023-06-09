@@ -7,8 +7,10 @@ import { Box } from "@mui/system";
 import ArticleItem from "../../components/ArticleItem";
 import Cell from "../../components/Cell";
 import { ArrowDropUp } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 function HotArticles() {
+    const navigate = useNavigate();
     const theadTitle = [
         "랭킹",
         "학과",
@@ -30,27 +32,33 @@ function HotArticles() {
                 px={1}
             >
                 {MockHotArticleJson.sort(
-                    (a, b) => b.dailyFluctuation - a.dailyFluctuation
+                    (a, b) => b.post.dailyFluctuation - a.post.dailyFluctuation
                 ).map((props, index) => {
-                    const {
-                        department,
-                        board,
-                        title,
-                        uploadDate,
-                        dailyFluctuation,
-                    } = props;
+                    const { department, board, post } = props;
                     return (
-                        <ArticleItem key={index} gtc="5% 10% 10% auto 10% 7%">
+                        <ArticleItem
+                            key={index}
+                            gtc="5% 10% 10% auto 10% 7%"
+                            onClick={() =>
+                                navigate(
+                                    `/department/${department.id}/board/${board.id}/post/${post.id}`
+                                )
+                            }
+                        >
                             <Cell>{index + 1}</Cell>
                             <Cell sx={{ justifyContent: "left" }}>
-                                {department}
+                                {department.name}
                             </Cell>
-                            <Cell sx={{ justifyContent: "left" }}>{board}</Cell>
-                            <Cell sx={{ justifyContent: "left" }}>{title}</Cell>
-                            <Cell>{uploadDate}</Cell>
+                            <Cell sx={{ justifyContent: "left" }}>
+                                {board.name}
+                            </Cell>
+                            <Cell sx={{ justifyContent: "left" }}>
+                                {post.title}
+                            </Cell>
+                            <Cell>{post.uploadDate}</Cell>
                             <Cell>
                                 <ArrowDropUp sx={{ color: "red" }} />{" "}
-                                {dailyFluctuation}
+                                {post.dailyFluctuation}
                             </Cell>
                         </ArticleItem>
                     );

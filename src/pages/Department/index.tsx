@@ -1,4 +1,4 @@
-import MockDepartmentBulletin from "../../mock/DepartmentBulletin.json";
+import MockDepartmentBulletin from "../../mock/Department.json";
 import TitleSection from "../../components/TitleSection";
 import { Stack, Divider } from "@mui/material";
 import Cell from "../../components/Cell";
@@ -6,15 +6,17 @@ import ArticleTableHead from "../../components/ArticleTableHead";
 import ArticleItem from "../../components/ArticleItem";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { alignmentState, boardState } from "../../store/store";
+import { useNavigate } from "react-router-dom";
 
 const Department = () => {
-    const { boards } = MockDepartmentBulletin;
+    const { department: dId, boards } = MockDepartmentBulletin;
     const { type, direction } = useRecoilValue(alignmentState);
     const setBoard = useSetRecoilState(boardState);
+    const navigate = useNavigate();
     return (
         <>
             <Stack direction={"column"} spacing={4} width={"100%"}>
-                {boards.map(({ name, id, articles }, index) => {
+                {boards.map(({ name, id: bId, posts }, index) => {
                     return (
                         <Stack
                             direction={"column"}
@@ -25,7 +27,7 @@ const Department = () => {
                             <TitleSection
                                 title={name}
                                 py={2}
-                                link={`./board/${id}`}
+                                link={`./board/${bId}`}
                                 linkLabel="더 보기"
                                 onLinkClicked={() => setBoard(name)}
                             />
@@ -34,7 +36,7 @@ const Department = () => {
                                 items={["번호", "제목", "날짜", "조회수"]}
                                 gtc={"5% auto 10% 7%"}
                             />
-                            {articles
+                            {posts
                                 .sort((a, b) => {
                                     switch (type) {
                                         case "date":
@@ -51,21 +53,22 @@ const Department = () => {
                                             return (
                                                 (a.view - b.view) * direction
                                             );
-                                        case "index":
-                                            return (
-                                                (a.index - b.index) * direction
-                                            );
                                         default:
                                             return 1;
                                     }
                                 })
-                                .map(({ index, title, uploadDate, view }) => {
+                                .map(({ id: pId, title, uploadDate, view }) => {
                                     return (
                                         <ArticleItem
-                                            key={index}
+                                            key={pId}
                                             gtc="5% auto 10% 7%"
+                                            onClick={() =>
+                                                navigate(
+                                                    `/department/${dId}/board/${bId}/post/${pId}`
+                                                )
+                                            }
                                         >
-                                            <Cell>{index}</Cell>
+                                            <Cell>{pId}</Cell>
                                             <Cell>{title}</Cell>
                                             <Cell>{uploadDate}</Cell>
                                             <Cell>{view}</Cell>

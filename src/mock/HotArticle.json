@@ -1,82 +1,112 @@
 [
     {
-        "department": "Engineering",
-        "board": "in faucibus",
-        "title": "lectus pellentesque at nulla suspendisse potenti",
-        "uploadDate": "2023-01-22",
-        "link": "/vestibulum/ante/ipsum/primis/in/faucibus/orci.png",
-        "dailyFluctuation": 273
+        "department": { "name": "diam id", "id": 53 },
+        "board": { "name": "turpis", "id": 45 },
+        "post": {
+            "id": 34,
+            "title": "lacinia eget tincidunt eget tempus",
+            "uploadDate": "2022-03-20",
+            "view": 3909,
+            "dailyFluctuation": 467
+        }
     },
     {
-        "department": "Training",
-        "board": "at nibh",
-        "title": "nec dui luctus rutrum nulla tellus in sagittis",
-        "uploadDate": "2023-03-08",
-        "link": "/nisl/duis/bibendum/felis/sed.jpg",
-        "dailyFluctuation": 181
+        "department": { "name": "ac", "id": 25 },
+        "board": { "name": "ante", "id": 86 },
+        "post": {
+            "id": 33,
+            "title": "quisque arcu libero rutrum ac lobortis vel dapibus",
+            "uploadDate": "2023-05-15",
+            "view": 6899,
+            "dailyFluctuation": 155
+        }
     },
     {
-        "department": "Support",
-        "board": "convallis",
-        "title": "justo sollicitudin ut suscipit a feugiat et",
-        "uploadDate": "2022-07-14",
-        "link": "/convallis/eget.jpg",
-        "dailyFluctuation": 451
+        "department": { "name": "diam vitae", "id": 37 },
+        "board": { "name": "augue", "id": 94 },
+        "post": {
+            "id": 51,
+            "title": "vestibulum vestibulum ante ipsum primis",
+            "uploadDate": "2022-04-25",
+            "view": 5765,
+            "dailyFluctuation": 490
+        }
     },
     {
-        "department": "Human Resources",
-        "board": "vitae",
-        "title": "justo pellentesque viverra pede ac diam cras",
-        "uploadDate": "2022-10-15",
-        "link": "/dui/vel/sem.jsp",
-        "dailyFluctuation": 562
+        "department": { "name": "ante", "id": 2 },
+        "board": { "name": "vitae", "id": 32 },
+        "post": {
+            "id": 12,
+            "title": "donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin",
+            "uploadDate": "2022-04-01",
+            "view": 5985,
+            "dailyFluctuation": 57
+        }
     },
     {
-        "department": "Services",
-        "board": "congue etiam",
-        "title": "enim lorem ipsum dolor sit",
-        "uploadDate": "2023-01-21",
-        "link": "/curae/donec.jpg",
-        "dailyFluctuation": 103
+        "department": { "name": "odio", "id": 56 },
+        "board": { "name": "elit", "id": 62 },
+        "post": {
+            "id": 31,
+            "title": "sit amet cursus id turpis",
+            "uploadDate": "2023-02-19",
+            "view": 5354,
+            "dailyFluctuation": 495
+        }
     },
     {
-        "department": "Engineering",
-        "board": "augue aliquam",
-        "title": "luctus et ultrices posuere cubilia curae",
-        "uploadDate": "2023-04-21",
-        "link": "/semper/interdum/mauris/ullamcorper/purus/sit.xml",
-        "dailyFluctuation": 14
+        "department": { "name": "nulla", "id": 95 },
+        "board": { "name": "rhoncus", "id": 94 },
+        "post": {
+            "id": 49,
+            "title": "a suscipit nulla elit ac nulla sed vel enim sit",
+            "uploadDate": "2022-09-02",
+            "view": 1202,
+            "dailyFluctuation": 52
+        }
     },
     {
-        "department": "Sales",
-        "board": "lectus",
-        "title": "volutpat sapien arcu sed augue aliquam",
-        "uploadDate": "2023-03-12",
-        "link": "/natoque/penatibus.xml",
-        "dailyFluctuation": 527
+        "department": { "name": "at nunc", "id": 21 },
+        "board": { "name": "ut", "id": 36 },
+        "post": {
+            "id": 65,
+            "title": "massa volutpat convallis morbi odio",
+            "uploadDate": "2022-07-14",
+            "view": 2682,
+            "dailyFluctuation": 304
+        }
     },
     {
-        "department": "Sales",
-        "board": "eget",
-        "title": "amet cursus id turpis integer aliquet massa",
-        "uploadDate": "2023-03-19",
-        "link": "/ultrices/posuere/cubilia/curae/duis/faucibus.xml",
-        "dailyFluctuation": 97
+        "department": { "name": "sem duis", "id": 54 },
+        "board": { "name": "consequat", "id": 24 },
+        "post": {
+            "id": 34,
+            "title": "sit amet eleifend pede libero",
+            "uploadDate": "2022-09-09",
+            "view": 2068,
+            "dailyFluctuation": 148
+        }
     },
     {
-        "department": "Research and Development",
-        "board": "nisl duis",
-        "title": "platea dictumst aliquam augue quam",
-        "uploadDate": "2022-08-15",
-        "link": "/ac/tellus/semper/interdum/mauris/ullamcorper/purus.jsp",
-        "dailyFluctuation": 788
+        "department": { "name": "pulvinar", "id": 79 },
+        "board": { "name": "iaculis", "id": 83 },
+        "post": {
+            "id": 99,
+            "title": "maecenas leo odio condimentum id luctus nec molestie sed",
+            "uploadDate": "2023-05-07",
+            "view": 5990,
+            "dailyFluctuation": 808
+        }
     },
     {
-        "department": "Marketing",
-        "board": "mi integer",
-        "title": "in eleifend quam a odio",
-        "uploadDate": "2022-07-20",
-        "link": "/morbi/odio.jsp",
-        "dailyFluctuation": 353
+        "department": { "name": "ullamcorper", "id": 78 },
+        "board": { "name": "etiam", "id": 60 },
+        "post": {
+            "id": 91,
+            "title": "id nisl venenatis lacinia aenean sit amet justo morbi ut",
+            "uploadDate": "2023-02-19",
+            "view": 3262,
+            "dailyFluctuation": 183
+        }
     }
 ]

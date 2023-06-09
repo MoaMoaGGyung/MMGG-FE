@@ -36,12 +36,14 @@ export default function Home() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        if (timer.current) clearInterval(timer.current);
         timer.current = setInterval(() => {
             setCurItem((prev) => {
                 return prev === 9 ? 0 : prev + 1;
             });
         }, 2000);
+        return () => {
+            timer.current && clearInterval(timer.current);
+        };
     }, []);
 
     return (
@@ -65,15 +67,9 @@ export default function Home() {
                 }}
             >
                 {MockHotArticleJson.sort(
-                    (a, b) => b.dailyFluctuation - a.dailyFluctuation
+                    (a, b) => b.post.dailyFluctuation - a.post.dailyFluctuation
                 ).map((props, index) => {
-                    const {
-                        department,
-                        board,
-                        title,
-                        uploadDate,
-                        dailyFluctuation,
-                    } = props;
+                    const { department, board, post } = props;
                     return (
                         <ArticleItem
                             key={index}
@@ -82,14 +78,18 @@ export default function Home() {
                         >
                             <Cell>{index + 1}</Cell>
                             <Cell sx={{ justifyContent: "left" }}>
-                                {department}
+                                {department.name}
                             </Cell>
-                            <Cell sx={{ justifyContent: "left" }}>{board}</Cell>
-                            <Cell sx={{ justifyContent: "left" }}>{title}</Cell>
-                            <Cell>{uploadDate}</Cell>
+                            <Cell sx={{ justifyContent: "left" }}>
+                                {board.name}
+                            </Cell>
+                            <Cell sx={{ justifyContent: "left" }}>
+                                {post.title}
+                            </Cell>
+                            <Cell>{post.uploadDate}</Cell>
                             <Cell>
                                 <ArrowDropUp sx={{ color: "red" }} />{" "}
-                                {dailyFluctuation}
+                                {post.dailyFluctuation}
                             </Cell>
                         </ArticleItem>
                     );

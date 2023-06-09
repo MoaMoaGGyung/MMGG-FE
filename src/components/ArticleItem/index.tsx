@@ -1,19 +1,22 @@
 import styled from "@emotion/styled";
+import { BoxProps } from "@mui/material";
 import { ReactNode } from "react";
 
-interface CurArticleType {
+interface CurArticleType extends BoxProps {
     current?: number;
     gtc: string;
+    onClick?: () => void;
     children: ReactNode;
 }
 
 function ArticleItem({
     current,
     gtc = "5% 10% 10% auto 10% 7%",
+    onClick,
     children,
 }: CurArticleType) {
     return (
-        <Container current={current} gtc={gtc}>
+        <Container current={current} gtc={gtc} onClick={onClick}>
             {children}
         </Container>
     );
