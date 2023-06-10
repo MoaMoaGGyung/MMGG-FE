@@ -1,19 +1,31 @@
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface CurArticleType {
     current?: number;
     gtc: string;
     children: ReactNode;
+    boardId: number;
+    postId: number;
 }
 
 function ArticleItem({
     current,
     gtc = "5% 10% 10% auto 10% 7%",
     children,
+    postId,
+    boardId,
 }: CurArticleType) {
+    const navigate = useNavigate();
     return (
-        <Container current={current} gtc={gtc}>
+        <Container
+            boardId={boardId}
+            postId={postId}
+            current={current}
+            gtc={gtc}
+            onClick={() => navigate(`/board/${boardId}/${postId}`)}
+        >
             {children}
         </Container>
     );

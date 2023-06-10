@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home/Home.tsx";
 import HotArticles from "./pages/HotArticles/HotArticles.tsx";
 import Bulletin from "./pages/Bulletin/Bulletin.tsx";
+import Post from "./pages/Post/Post.tsx";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
             {
                 path: "/board/:id",
                 element: <Bulletin />,
+            },
+            {
+                path: "/board/:id/:postId",
+                element: <Post />,
             },
         ],
     },

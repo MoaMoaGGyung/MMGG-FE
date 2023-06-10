@@ -106,6 +106,8 @@ const Bulletin = () => {
                                             <ArticleItem
                                                 key={index}
                                                 gtc="5% auto 10% 7%"
+                                                boardId={department.id}
+                                                postId={index}
                                             >
                                                 <Cell>{index}</Cell>
                                                 <Cell>{title}</Cell>
