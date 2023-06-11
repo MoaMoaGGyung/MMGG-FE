@@ -7,6 +7,9 @@ import HotArticles from "./pages/HotArticles";
 import Department from "./pages/Department";
 import Board from "./pages/Board";
 import Detail from "./pages/Detail";
+import axios from "axios";
+
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const router = createBrowserRouter([
     {

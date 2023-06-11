@@ -14,18 +14,14 @@ import {
 import { ChangeEvent, useEffect } from "react";
 import { Outlet, useParams, useSearchParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-    alignmentDirectionState,
-    alignmentTypeState,
-    departmentState,
-} from "../../store/store";
+import { alignmentDirectionState, alignmentTypeState } from "../../store/store";
 import CustomLink from "../../components/CustomLink";
 
 type AlignmentType = "date" | "view";
 type AlignmentDirectionType = 1 | -1;
 
 const Detail = () => {
-    const department = useRecoilValue(departmentState);
+    const department = "";
     const { dId } = useParams();
     const [alignment, setAlignment] = useRecoilState(alignmentTypeState);
     const [dir, setDir] = useRecoilState(alignmentDirectionState);

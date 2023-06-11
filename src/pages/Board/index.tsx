@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { alignmentState, curPathState } from "../../store/store";
+import { alignmentState } from "../../store/store";
 import MockBoard1 from "../../mock/Board1.json";
 import { Stack } from "@mui/system";
 import { Box, Divider, Pagination } from "@mui/material";
@@ -20,7 +20,6 @@ import { useNavigate } from "react-router-dom";
 
 const Board = () => {
     const { type, direction } = useRecoilValue(alignmentState);
-    const [{ department, board }, setCurPath] = useRecoilState(curPathState);
     const { dName, bName, totalPage, curPage, posts } = MockBoard1;
     const [page, setPage] = useState(curPage);
     const navigate = useNavigate();
@@ -52,9 +51,6 @@ const Board = () => {
     };
 
     useEffect(() => {
-        if (!department || !board) {
-            setCurPath({ department: dName, board: bName });
-        }
         window.scrollTo(0, 0);
     }, []);
 
@@ -62,7 +58,7 @@ const Board = () => {
 
     return (
         <Stack direction={"column"} spacing={1} width={"100%"}>
-            <TitleSection title={board} py={2} />
+            <TitleSection title={""} py={2} />
             <Divider sx={{ width: "100%" }} />
             <ArticleTableHead
                 items={["번호", "제목", "날짜", "조회수"]}

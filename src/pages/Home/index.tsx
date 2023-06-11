@@ -1,127 +1,23 @@
-import MockHotArticleJson from "../../mock/HotArticle.json";
-import {
-    Box,
-    Divider,
-    List,
-    ListItem,
-    ListItemIcon,
-    Stack,
-} from "@mui/material";
-import Cell from "../../components/Cell";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import ArticleItem from "../../components/ArticleItem";
-import { ArrowDropUp, Search } from "@mui/icons-material";
-import Searchbar from "../../components/Searchbar";
+import { Divider, Stack } from "@mui/material";
+import { ChangeEvent, useState } from "react";
 import TitleSection from "../../components/TitleSection";
 import HomeLayout from "../../components/HomeLayout";
-import ArticleTableHead from "../../components/ArticleTableHead";
 import BulletinSection from "../../components/BulletinSection";
+import RollingHotArticleSection from "../../components/RollingHotArticleSection";
+import SearchSection from "../../components/SearchSection";
 
 export default function Home() {
-    const [curItem, setCurItem] = useState(0);
-    const timer = useRef<null | number>();
+    console.debug("Home Rendered!");
     const [search, setSearch] = useState("");
-    const theadTitle = [
-        "랭킹",
-        "학과",
-        "게시판",
-        "제목",
-        "날짜",
-        "일일 변동량",
-    ];
-
-    const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     };
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        timer.current = setInterval(() => {
-            setCurItem((prev) => {
-                return prev === 9 ? 0 : prev + 1;
-            });
-        }, 2000);
-        return () => {
-            timer.current && clearInterval(timer.current);
-        };
-    }, []);
-
     return (
         <HomeLayout>
-            <TitleSection
-                title={"🔥 일일 Hot 공지"}
-                link={"/hot"}
-                linkLabel="더 보기"
-            />
-            <Divider sx={{ width: "100%" }} />
-            <ArticleTableHead gtc="5% 10% 10% auto 10% 7%" items={theadTitle} />
-            <Box
-                width={"100%"}
-                display={"flex"}
-                flexDirection={"column"}
-                gap={1}
-                height={57.3}
-                px={1}
-                sx={{
-                    overflow: "hidden",
-                }}
-            >
-                {MockHotArticleJson.sort(
-                    (a, b) => b.post.dailyFluctuation - a.post.dailyFluctuation
-                ).map((props, index) => {
-                    const { department, board, post } = props;
-                    return (
-                        <ArticleItem
-                            key={index}
-                            current={curItem}
-                            gtc="5% 10% 10% auto 10% 7%"
-                        >
-                            <Cell>{index + 1}</Cell>
-                            <Cell sx={{ justifyContent: "left" }}>
-                                {department.name}
-                            </Cell>
-                            <Cell sx={{ justifyContent: "left" }}>
-                                {board.name}
-                            </Cell>
-                            <Cell sx={{ justifyContent: "left" }}>
-                                {post.title}
-                            </Cell>
-                            <Cell>{post.uploadDate}</Cell>
-                            <Cell>
-                                <ArrowDropUp sx={{ color: "red" }} />{" "}
-                                {post.dailyFluctuation}
-                            </Cell>
-                        </ArticleItem>
-                    );
-                })}
-            </Box>
-            <Box
-                justifyContent={"center"}
-                alignItems={"center"}
-                width={"50%"}
-                py={2}
-                mx={"auto"}
-            >
-                <List>
-                    <ListItem
-                        sx={{ border: "1px solid black", borderRadius: "20px" }}
-                    >
-                        <ListItemIcon>
-                            <Search />
-                        </ListItemIcon>
-                        <Searchbar
-                            value={search}
-                            placeholder="학과 검색"
-                            onChange={handleSearch}
-                        />
-                    </ListItem>
-                </List>
-            </Box>
-            <Stack direction={"column"} rowGap={2}>
-                <TitleSection title="📄 게시판" />
-                <Divider sx={{ width: "100%" }} />
-                <BulletinSection keyword={search} />
-            </Stack>
+            <RollingHotArticleSection />
+            <SearchSection keyword={search} handleChange={handleChange} />
+            <BulletinSection keyword={search} />
         </HomeLayout>
     );
 }

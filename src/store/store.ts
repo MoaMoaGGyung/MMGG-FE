@@ -1,4 +1,6 @@
 import { DefaultValue, atom, selector } from "recoil";
+import { HomeType, boardType, departmentType, hotPostType, recentPostType } from "../types/types";
+import axios from "axios";
 
 export const alignmentTypeState = atom({
     key: 'alignmentType',
@@ -19,44 +21,46 @@ export const alignmentState = selector({
     }
 })
 
-export const boardState = atom({
-    key: 'board',
-    default: '',
-})
-
-type articleType = {
-    index: number;
-    title: string;
-    uploadDate: string;
-    view: number;
-}
-
-export const curArticles = atom<articleType[]>({
-    key: 'article',
+export const hotPostAtom = atom<hotPostType[]>({
+    key: 'hotPostAtom',
     default: []
 })
 
-export const departmentState = atom({
-    key: 'department',
-    default: '',
+export const hotPostState = selector<hotPostType[]>({
+    key: 'hotPostState',
+    get: async ({get}) => {
+        const currentData = get(hotPostAtom);
+        if(currentData.length === 0) {
+            const response = await axios.get(`/hot?key=${import.meta.env.VITE_MOCK_KEY}`);
+            return response.data;
+        }
+        return currentData;
+    },
+    set: ({set}, newValue) => {
+        if(!(newValue instanceof DefaultValue)) {
+            set(hotPostAtom, newValue);
+        }
+    }
 })
 
+export const recentPostAtom = atom<recentPostType[]>({
+    key: 'recentPostAtom',
+    default: []
+})
 
-export const curPathState = selector({
-    key: 'curPath',
-    get: ({get}) => {
-        const board = get(boardState);
-        const department = get(departmentState);
-        return {department, board};
+export const recentPostState = selector<recentPostType[]>({
+    key: 'recentPostState',
+    get: async ({get}) => {
+        const currentData = get(recentPostAtom);
+        if(currentData.length === 0) {
+            const response = await axios.get(`/recent-posts?key=${import.meta.env.VITE_MOCK_KEY}`);
+            return response.data;
+        }
+        return currentData;
     },
-    set: ({set, reset}, newValue) => {
+    set: ({set}, newValue) => {
         if(!(newValue instanceof DefaultValue)) {
-            const {department, board} = newValue;
-            set(departmentState, department);
-            set(boardState, board);
-        } else {
-            reset(departmentState);
-            reset(boardState);
+            set(recentPostAtom, newValue);
         }
     }
 })

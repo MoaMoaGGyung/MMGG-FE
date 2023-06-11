@@ -5,13 +5,12 @@ import Cell from "../../components/Cell";
 import ArticleTableHead from "../../components/ArticleTableHead";
 import ArticleItem from "../../components/ArticleItem";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { alignmentState, boardState } from "../../store/store";
+import { alignmentState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
 
 const Department = () => {
     const { department: dId, boards } = MockDepartmentBulletin;
     const { type, direction } = useRecoilValue(alignmentState);
-    const setBoard = useSetRecoilState(boardState);
     const navigate = useNavigate();
     return (
         <>
@@ -29,7 +28,7 @@ const Department = () => {
                                 py={2}
                                 link={`./board/${bId}`}
                                 linkLabel="더 보기"
-                                onLinkClicked={() => setBoard(name)}
+                                onLinkClicked={() => {}}
                             />
                             <Divider sx={{ width: "100%" }} />
                             <ArticleTableHead
