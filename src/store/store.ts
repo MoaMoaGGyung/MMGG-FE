@@ -31,7 +31,7 @@ export const hotPostState = selector<hotPostType[]>({
     get: async ({get}) => {
         const currentData = get(hotPostAtom);
         if(currentData.length === 0) {
-            const response = await axios.get(`/hot?key=${import.meta.env.VITE_MOCK_KEY}`);
+            const response = await axios.get(`/posts/hot`);
             return response.data;
         }
         return currentData;
@@ -53,7 +53,7 @@ export const recentPostState = selector<recentPostType[]>({
     get: async ({get}) => {
         const currentData = get(recentPostAtom);
         if(currentData.length === 0) {
-            const response = await axios.get(`/recent-posts?key=${import.meta.env.VITE_MOCK_KEY}`);
+            const response = await axios.get(`/recent-posts`);
             return response.data;
         }
         return currentData;
@@ -61,6 +61,25 @@ export const recentPostState = selector<recentPostType[]>({
     set: ({set}, newValue) => {
         if(!(newValue instanceof DefaultValue)) {
             set(recentPostAtom, newValue);
+        }
+    }
+})
+
+export const homeAtom = atom<HomeType | null>({
+    key: 'homeAtom',
+    default: null
+})
+
+export const homeState = selector<HomeType>({
+    key: 'homeState',
+    get: async ({get}) => {
+        const hot = get(hotPostState);
+        const recent = get(recentPostState);
+        return {hot, recent}
+    },
+    set: ({set}, newValue) => {
+        if(!(newValue instanceof DefaultValue)) {
+            set(homeAtom, newValue);
         }
     }
 })

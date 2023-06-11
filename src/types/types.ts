@@ -45,5 +45,5 @@ export type recentPostType = {
 
 export type HomeType = {
     hot : hotPostType[];
-    recentPosts: recentPostType[];
+    recent: recentPostType[];
 }
