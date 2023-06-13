@@ -1,6 +1,19 @@
-import { DefaultValue, atom, selector } from "recoil";
-import { HomeType, boardType, departmentType, hotPostType, recentPostType } from "../types/types";
+import { DefaultValue, atom, selector, selectorFamily } from "recoil";
+import {  BreadCrumbType, KeywordType, boardType, departmentType, hotPostType, recentPostType } from "../types/types";
 import axios from "axios";
+
+const mock = axios.create({
+    baseURL: import.meta.env.VITE_MOCK_BASE_URL,
+    params: {
+        key: import.meta.env.VITE_MOCK_KEY
+    }
+  });
+
+const prod = axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL
+})
+
+const instance = prod;
 
 export const alignmentTypeState = atom({
     key: 'alignmentType',
@@ -31,7 +44,7 @@ export const hotPostState = selector<hotPostType[]>({
     get: async ({get}) => {
         const currentData = get(hotPostAtom);
         if(currentData.length === 0) {
-            const response = await axios.get(`/posts/hot`);
+            const response = await instance.get(`/hot`);
             return response.data;
         }
         return currentData;
@@ -53,7 +66,7 @@ export const recentPostState = selector<recentPostType[]>({
     get: async ({get}) => {
         const currentData = get(recentPostAtom);
         if(currentData.length === 0) {
-            const response = await axios.get(`/recent-posts`);
+            const response = await instance.get(`/recent-posts?limit=6`);
             return response.data;
         }
         return currentData;
@@ -65,21 +78,61 @@ export const recentPostState = selector<recentPostType[]>({
     }
 })
 
-export const homeAtom = atom<HomeType | null>({
-    key: 'homeAtom',
-    default: null
+export const departmentAtom = atom<departmentType>({
+    key: 'departmentAtom',
+    default: {
+        department: {
+            name: '',
+            id: 0
+        },
+        boards: []
+    }
 })
 
-export const homeState = selector<HomeType>({
-    key: 'homeState',
-    get: async ({get}) => {
-        const hot = get(hotPostState);
-        const recent = get(recentPostState);
-        return {hot, recent}
+export const departmentState = selectorFamily<departmentType, number>({
+    key: 'departmentState',
+    get: dId => async ({get}) => {
+        const currentData = get(departmentAtom);
+        if(!currentData.department.name) {
+            const response = await instance(`/department/${dId}`)
+            return response.data;
+        }
+        return currentData;
     },
-    set: ({set}, newValue) => {
+    set: _ => ({set}, newValue) => {
+        set(departmentAtom, newValue);
+    }
+})
+
+export const boardAtom = atom<boardType>({
+    key: 'boardAtom',
+    default: {
+        dName: '',
+        bName: '',
+        totalPage: 0,
+        curPage: 0,
+        posts: []
+    }
+})
+
+export const boardState = selectorFamily<boardType, {dId: number; bId: number; page: number;}>({
+    key: 'boardState',
+    get: ({dId, bId, page}) => async ({get}) => {
+        const currentData = get(boardAtom);
+        if(!currentData.dName) {
+            const response = await instance(`/department/${dId}/board/${bId}`)
+            return response.data;
+        }
+        return currentData;
+    },
+    set: (_) => ({set}, newValue) => {
         if(!(newValue instanceof DefaultValue)) {
-            set(homeAtom, newValue);
+            set(boardAtom, newValue);
         }
     }
+})
+
+export const keywordAtom = atom<KeywordType>({
+    key: 'keywordAtom',
+    default: ''
 })

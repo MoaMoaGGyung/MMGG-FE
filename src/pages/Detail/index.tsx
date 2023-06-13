@@ -12,17 +12,22 @@ import {
     SelectChangeEvent,
 } from "@mui/material";
 import { ChangeEvent, useEffect } from "react";
-import { Outlet, useParams, useSearchParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { alignmentDirectionState, alignmentTypeState } from "../../store/store";
+import {
+    alignmentDirectionState,
+    alignmentTypeState,
+    departmentAtom,
+} from "../../store/store";
 import CustomLink from "../../components/CustomLink";
+import DepartmentSkeleton from "../../components/Skeletons/DepartmentSkeleton";
 
 type AlignmentType = "date" | "view";
 type AlignmentDirectionType = 1 | -1;
 
 const Detail = () => {
-    const department = "";
-    const { dId } = useParams();
+    console.info("Detail rendered!");
+    const { department } = useRecoilValue(departmentAtom);
     const [alignment, setAlignment] = useRecoilState(alignmentTypeState);
     const [dir, setDir] = useRecoilState(alignmentDirectionState);
     const handleChange = (e: SelectChangeEvent<string>) => {
@@ -44,18 +49,27 @@ const Detail = () => {
                 direction={"row"}
                 justifyContent={"space-between"}
                 width={"100%"}
+                height={"100%"}
             >
-                <CustomLink to={`/department/${dId}`} sx={{ color: "black" }}>
-                    <Typography
-                        variant="h4"
-                        component={"span"}
-                        fontWeight={600}
-                        fontFamily={"Noto Sans KR"}
+                {!department.name ? (
+                    <DepartmentSkeleton />
+                ) : (
+                    <CustomLink
+                        to={`/department/${department.id}`}
+                        sx={{ color: "black" }}
                     >
-                        {department}
-                    </Typography>
-                </CustomLink>
-                <Stack direction={"row"} spacing={1}>
+                        <Typography
+                            variant="h4"
+                            component={"span"}
+                            fontWeight={600}
+                            fontFamily={"Noto Sans KR"}
+                        >
+                            {department.name}
+                        </Typography>
+                    </CustomLink>
+                )}
+
+                <Stack direction={"row"} spacing={1} width={"fit-content"}>
                     <FormControl size="small">
                         <Select
                             value={alignment}

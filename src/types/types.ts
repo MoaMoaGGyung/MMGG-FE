@@ -1,3 +1,5 @@
+export type LoadableStateType = "hasValue" | "hasError" | "loading";
+
 export interface commonType {
     id: number;
     name: string;
@@ -13,18 +15,20 @@ export type postType = {
 }
 
 export type boardType = {
-    department: commonType;
-    board: commonType;
+    dName: string;
+    bName: string;
     totalPage: number;
     curPage: number;
-    posts?: postType[];
+    posts: postType[];
 }
 
 export type departmentType = {
     department: commonType;
-    board: commonType & {
+    boards: {
+        name: '',
+        id: 0,
         posts: postType[];
-    }
+    }[];
 }
 
 export type hotPostType = {
@@ -47,3 +51,14 @@ export type HomeType = {
     hot : hotPostType[];
     recent: recentPostType[];
 }
+
+export type BreadCrumbType = {
+    department : commonType;
+    board: commonType;
+    post: {
+        id: number;
+        title: string;
+    };
+}
+
+export type KeywordType = string;
