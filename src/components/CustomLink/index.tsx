@@ -1,42 +1,46 @@
-import styled from "@emotion/styled";
-import { LinkBaseProps } from "@mui/material";
-import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Box, BoxProps } from "@mui/material";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-interface CustomLinkType extends LinkBaseProps {
+interface CustomLinkType extends BoxProps {
     to: string;
-    size?: string | number;
-    fontWeight?: number;
-    color?: string;
-    children: ReactNode | string;
+    onLinkClicked?: () => void;
+    children: React.ReactNode | string;
 }
 
-const Container = styled(Link)<{
-    color: string;
-    fontWeight: number;
-    size: string | number;
-}>`
-    text-decoration: none;
-    &:hover {
-        color: #305ad9;
-        text-decoration: underline;
-    }
-    color: ${({ color }) => color};
-    font-family: "Inter";
-    font-size: ${({ size }) => size};
-    font-weight: ${({ fontWeight }) => fontWeight};
-`;
-
-export const CustomLink = ({
+const CustomLink = ({
     children,
     to,
-    color = "#b2b2b2",
-    fontWeight = 300,
-    size = "20px",
+    onLinkClicked,
+    sx,
+    ...rest
 }: CustomLinkType) => {
+    const navigate = useNavigate();
     return (
-        <Container to={to} color={color} fontWeight={fontWeight} size={size}>
+        <Box
+            sx={Object.assign(
+                {
+                    width: "fit-content",
+                    color: "#b2b2b2",
+                    fontWeight: 300,
+                    fontSize: "20px",
+                    "&:hover": {
+                        cursor: "pointer",
+                        color: "#3d3aff",
+                        textDecoration: "underline",
+                    },
+                },
+                sx
+            )}
+            onClick={() => {
+                onLinkClicked && onLinkClicked();
+                navigate(to);
+            }}
+            {...rest}
+        >
             {children}
-        </Container>
+        </Box>
     );
 };
+
+export default CustomLink;

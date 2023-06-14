@@ -8,9 +8,11 @@ import {
     Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
     return (
         <>
             <AppBar position="static" sx={{ bgcolor: "#FFE0B1" }}>
@@ -34,7 +36,11 @@ function Header() {
                             color: "#464646",
                             fontFamily: "Bruno Ace SC, cursive",
                             fontSize: "clamp(1rem, 3vw, 2rem)",
+                            "&:hover": {
+                                cursor: "pointer",
+                            },
                         }}
+                        onClick={() => navigate("/")}
                     >
                         CNU NOTICE HUB
                     </Box>
