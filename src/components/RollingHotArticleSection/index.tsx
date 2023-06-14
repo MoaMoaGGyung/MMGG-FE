@@ -1,35 +1,33 @@
-import { Loadable, SetterOrUpdater } from "recoil";
-import { hotPostState } from "../../store/store";
-import React, { useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { hotPostAtom, instance } from "../../store/store";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import TitleSection from "../TitleSection";
-import { Divider, Skeleton } from "@mui/material";
+import { Divider } from "@mui/material";
 import ArticleTableHead from "../ArticleTableHead";
 import { Box } from "@mui/system";
 import ArticleItem from "../ArticleItem";
 import Cell from "../Cell";
 import { ArrowDropUp } from "@mui/icons-material";
-import { LoadableStateType, hotPostType } from "../../types/types";
 import PostSkeletion from "../Skeletons/PostSkeletion";
+import { HotPostType } from "../../types/types";
+import axios from "axios";
 
-type RollingHotArticleSection = {
-    hotPosts: hotPostType[];
-    setHotPosts: SetterOrUpdater<hotPostType[]>;
-    hotState: LoadableStateType;
-};
+interface SectionType {}
 
-const theadTitle = ["랭킹", "학과", "게시판", "제목", "날짜", "일일 변동량"];
+const theadTitle = ["랭킹", "학과", "게시판", "제목", "날짜", "주간 변동량"];
+const source = axios.CancelToken.source();
 
-const RollingHotArticleSection = ({
-    hotPosts,
-    setHotPosts,
-    hotState,
-}: RollingHotArticleSection) => {
+const RollingHotArticleSection = () => {
     console.info("RollingHotArticleSection rendered!");
     const [curItem, setCurItem] = useState(0);
     const timer = useRef<null | number>();
+    const [hotPosts, setHotPosts] = useState<HotPostType[]>([]);
+    const [globalHotState, setGlobalHotState] =
+        useRecoilState<HotPostType[]>(hotPostAtom);
 
     useEffect(() => {
-        if (hotPosts.length) {
+        if (globalHotState.length) {
+            setHotPosts(globalHotState);
             timer.current = setInterval(() => {
                 setCurItem((prev) => {
                     return prev === 9 ? 0 : prev + 1;
@@ -38,17 +36,44 @@ const RollingHotArticleSection = ({
             return () => {
                 timer.current && clearInterval(timer.current);
             };
+        } else {
+            const api = async () => {
+                const response = await instance<HotPostType[]>("/hot", {
+                    cancelToken: source.token,
+                });
+                try {
+                    if (response.status === 200) {
+                        const tmp = response.data.sort(
+                            (a, b) =>
+                                b.post.dailyFluctuation -
+                                a.post.dailyFluctuation
+                        );
+                        setHotPosts(tmp);
+                        setGlobalHotState(tmp);
+                    } else {
+                        console.error(response.data);
+                    }
+                } catch (error) {
+                    if (axios.isCancel(error)) {
+                        console.error("HotArticle request canceled!");
+                    }
+                }
+            };
+            api();
         }
-    }, [hotPosts]);
+    }, [globalHotState]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        return () => {
+            source.cancel();
+        };
     }, []);
 
     return (
         <>
             <TitleSection
-                title={"🔥 일일 Hot 공지"}
+                title={"🔥 주간 Hot 공지"}
                 link={"/hot"}
                 linkLabel="더 보기"
             />
@@ -83,9 +108,7 @@ const RollingHotArticleSection = ({
                                 <Cell sx={{ justifyContent: "left" }}>
                                     {post.title}
                                 </Cell>
-                                <Cell>
-                                    {post.uploadDate.toString().slice(0, 10)}
-                                </Cell>
+                                <Cell>{post.uploadDate}</Cell>
                                 <Cell>
                                     <ArrowDropUp sx={{ color: "red" }} />{" "}
                                     {post.dailyFluctuation}

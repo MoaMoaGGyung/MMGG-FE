@@ -31,7 +31,7 @@ const Container = styled.div<CurArticleType>`
     border: 0.5px solid #ccc;
     border-radius: 7px;
     column-gap: 8px;
-    padding: 8px 2px;
+    padding: 8px 10px;
     &:hover {
         cursor: pointer;
         background-color: #ccc;

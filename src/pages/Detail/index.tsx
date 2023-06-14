@@ -27,13 +27,12 @@ type AlignmentDirectionType = 1 | -1;
 
 const Detail = () => {
     console.info("Detail rendered!");
-    const { department } = useRecoilValue(departmentAtom);
+    const department = useRecoilValue(departmentAtom);
     const [alignment, setAlignment] = useRecoilState(alignmentTypeState);
     const [dir, setDir] = useRecoilState(alignmentDirectionState);
     const handleChange = (e: SelectChangeEvent<string>) => {
         setAlignment((_) => e.target.value as AlignmentType);
     };
-
     const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
         setDir(parseInt(e.target.value) as AlignmentDirectionType);
     };
@@ -69,7 +68,14 @@ const Detail = () => {
                     </CustomLink>
                 )}
 
-                <Stack direction={"row"} spacing={1} width={"fit-content"}>
+                <Stack
+                    direction={"row"}
+                    spacing={1}
+                    width={"370px"}
+                    display={"flex"}
+                    justifyContent={"right"}
+                    alignItems={"end"}
+                >
                     <FormControl size="small">
                         <Select
                             value={alignment}

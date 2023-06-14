@@ -3,58 +3,34 @@ import { Stack, Divider } from "@mui/material";
 import Cell from "../../components/Cell";
 import ArticleTableHead from "../../components/ArticleTableHead";
 import ArticleItem from "../../components/ArticleItem";
-import { useRecoilStateLoadable, useRecoilValue } from "recoil";
-import {
-    alignmentState,
-    departmentAtom,
-    departmentState,
-} from "../../store/store";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { alignmentState, departmentAtom, instance } from "../../store/store";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { departmentType } from "../../types/types";
-import { produce } from "immer";
+import { CommonType, DepartmentType } from "../../types/types";
 
 const Department = () => {
     console.info("Department rendered!");
     const { dId } = useParams() as { dId: string };
     const navigate = useNavigate();
-    const [dStateLoadable, setDState] = useRecoilStateLoadable(
-        departmentState(parseInt(dId))
-    );
-    const dState = useRecoilValue<departmentType>(departmentAtom);
+    const [dState, setDState] = useState<DepartmentType>();
     const { type, direction } = useRecoilValue(alignmentState);
+    const setGlobalDState = useSetRecoilState<CommonType>(departmentAtom);
 
     useEffect(() => {
-        if (dStateLoadable.state === "hasValue") {
-            setDState(
-                produce((draft) => {
-                    draft.boards.map(({ posts }) =>
-                        posts.sort((a, b) => {
-                            switch (type) {
-                                case "date":
-                                    return (
-                                        (new Date(a.uploadDate).getTime() -
-                                            new Date(b.uploadDate).getTime()) *
-                                        direction
-                                    );
-                                case "view":
-                                    return (a.view - b.view) * direction;
-                                default:
-                                    return 1;
-                            }
-                        })
-                    );
-                    return draft;
-                })
+        const api = async () => {
+            const response = await instance<DepartmentType>(
+                `/department/${dId}?limit=6`
             );
-        }
-    }, [type, direction]);
-
-    useEffect(() => {
-        if (dStateLoadable.state === "hasValue") {
-            setDState(dStateLoadable.contents);
-        }
-    }, [dStateLoadable]);
+            if (response.status === 200) {
+                setDState(response.data);
+                setGlobalDState(response.data.department);
+            } else {
+                console.error(response.data);
+            }
+        };
+        api();
+    }, []);
 
     return (
         <>
@@ -79,8 +55,28 @@ const Department = () => {
                                 items={["번호", "제목", "날짜", "조회수"]}
                                 gtc={"5% auto 10% 7%"}
                             />
-                            {posts.map(
-                                ({ id: pId, title, uploadDate, view }) => {
+                            {posts
+                                .sort((a, b) => {
+                                    switch (type) {
+                                        case "date":
+                                            return (
+                                                (new Date(
+                                                    a.uploadDate
+                                                ).getTime() -
+                                                    new Date(
+                                                        b.uploadDate
+                                                    ).getTime()) *
+                                                direction
+                                            );
+                                        case "view":
+                                            return (
+                                                (a.view - b.view) * direction
+                                            );
+                                        default:
+                                            return 1;
+                                    }
+                                })
+                                .map(({ id: pId, title, uploadDate, view }) => {
                                     return (
                                         <ArticleItem
                                             key={pId}
@@ -97,8 +93,7 @@ const Department = () => {
                                             <Cell>{view}</Cell>
                                         </ArticleItem>
                                     );
-                                }
-                            )}
+                                })}
                         </Stack>
                     );
                 })}

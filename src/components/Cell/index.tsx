@@ -5,22 +5,16 @@ interface CellType extends BoxProps {
     children: React.ReactNode;
 }
 
-const Cell = ({ children, sx, component, ...rest }: CellType) => {
+const Cell = ({ children, justifyContent, ...rest }: CellType) => {
     return (
         <Box
-            component={component}
-            sx={Object.assign(
-                {
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "15px",
-                    position: "relative",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                },
-                sx
-            )}
+            display={"flex"}
+            justifyContent={justifyContent || "center"}
+            alignItems={"center"}
+            fontSize={"15px"}
+            position={"relative"}
+            overflow={"hidden"}
+            whiteSpace={"nowrap"}
             {...rest}
         >
             {children}

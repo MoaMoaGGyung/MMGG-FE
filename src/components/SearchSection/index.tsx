@@ -6,7 +6,10 @@ import styled from "@emotion/styled";
 import { useRecoilState } from "recoil";
 import { keywordAtom } from "../../store/store";
 
-interface SectionType {}
+interface SectionType {
+    keyword: string;
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
 
 const Searchbar = styled.input`
     width: 100%;
@@ -16,8 +19,7 @@ const Searchbar = styled.input`
     }
 `;
 
-const SearchSection = () => {
-    const [keyword, setKeyword] = useRecoilState(keywordAtom);
+const SearchSection = ({ keyword, handleChange }: SectionType) => {
     console.info("SearchSection rendered!");
     return (
         <Box
@@ -37,7 +39,7 @@ const SearchSection = () => {
                     <Searchbar
                         value={keyword}
                         placeholder="학과 검색"
-                        onChange={(e) => setKeyword(e.target.value)}
+                        onChange={handleChange}
                     />
                 </ListItem>
             </List>

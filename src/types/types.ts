@@ -1,64 +1,61 @@
 export type LoadableStateType = "hasValue" | "hasError" | "loading";
 
-export interface commonType {
+export interface CommonType {
     id: number;
     name: string;
 }
 
-export type postType = {
+export type PostType = {
     id: number;
     title: string;
     uploadDate: string;
     view: number;
     dailyFluctuation?: number;
     content?: string;
-}
+};
 
-export type boardType = {
-    dName: string;
-    bName: string;
+export type BoardType = {
+    dname: string;
+    bname: string;
     totalPage: number;
     curPage: number;
-    posts: postType[];
-}
+    posts: PostType[];
+};
 
-export type departmentType = {
-    department: commonType;
+export type DepartmentType = {
+    department: CommonType;
     boards: {
-        name: '',
-        id: 0,
-        posts: postType[];
+        name: "";
+        id: 0;
+        posts: PostType[];
     }[];
-}
+};
 
-export type hotPostType = {
-    department: commonType;
-    board: commonType;
-    post: Required<Omit<postType, 'content'>>;
-}
+export type HotPostType = {
+    department: CommonType;
+    board: CommonType;
+    post: Required<Omit<PostType, "content">>;
+};
 
-export type recentPostType = {
-    department: commonType;
+export type RecentPostType = {
+    department: CommonType;
     recent_posts: {
         title: string;
         dId: number;
         bId: number;
         pId: number;
     }[];
-}
+};
 
 export type HomeType = {
-    hot : hotPostType[];
-    recent: recentPostType[];
-}
+    hot: HotPostType[];
+    recent: RecentPostType[];
+};
 
-export type BreadCrumbType = {
-    department : commonType;
-    board: commonType;
-    post: {
-        id: number;
-        title: string;
-    };
-}
+export type BreadcrumbType = {
+    department?: CommonType;
+    board?: CommonType;
+    post?: CommonType;
+};
 
 export type KeywordType = string;
