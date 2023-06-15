@@ -117,12 +117,16 @@ export const breadcrumbState = selector<BreadcrumbType>({
         const post = get(postAtom);
         return { department, board, post };
     },
-    set: ({ set }, newValue) => {
+    set: ({ set, reset }, newValue) => {
         if (!(newValue instanceof DefaultValue)) {
             const { department, board, post } = newValue;
             if (department) set(departmentAtom, department);
             if (board) set(boardAtom, board);
             if (post) set(postAtom, post);
+        } else {
+            reset(departmentAtom);
+            reset(boardAtom);
+            reset(postAtom);
         }
     },
 });

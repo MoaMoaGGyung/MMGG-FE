@@ -1,15 +1,12 @@
 import styled from "@emotion/styled";
 import { BoxProps } from "@mui/material";
 import { ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface CurArticleType extends BoxProps {
     current?: number;
     gtc: string;
     onClick?: () => void;
     children: ReactNode;
-    boardId: number;
-    postId: number;
 }
 
 function ArticleItem({
@@ -17,10 +14,7 @@ function ArticleItem({
     gtc = "5% 10% 10% auto 10% 7%",
     onClick,
     children,
-    postId,
-    boardId,
 }: CurArticleType) {
-    const navigate = useNavigate();
     return (
         <Container current={current} gtc={gtc} onClick={onClick}>
             {children}
@@ -37,7 +31,7 @@ const Container = styled.div<CurArticleType>`
     border: 0.5px solid #ccc;
     border-radius: 7px;
     column-gap: 8px;
-    padding: 8px 10px;
+    padding: 8px 2px;
     &:hover {
         cursor: pointer;
         background-color: #ccc;

@@ -20,7 +20,7 @@ import {
     departmentAtom,
 } from "../../store/store";
 import CustomLink from "../../components/CustomLink";
-import DepartmentSkeleton from "../../components/Skeletons/DepartmentSkeleton";
+import DepartmentSkeleton from "../../components/Skeletons/DetailSkeleton";
 
 type AlignmentType = "date" | "view";
 type AlignmentDirectionType = 1 | -1;

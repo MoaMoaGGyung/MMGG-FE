@@ -50,9 +50,10 @@ const RollingHotArticleSection = () => {
                         );
                         setHotPosts(tmp);
                         setGlobalHotState(tmp);
-                    } else {
-                        console.error(response.data);
                     }
+                    // else {
+                    //     console.error(response.data);
+                    // }
                 } catch (error) {
                     if (axios.isCancel(error)) {
                         console.error("HotArticle request canceled!");

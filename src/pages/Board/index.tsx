@@ -18,6 +18,7 @@ const Board = () => {
     const navigate = useNavigate();
     const [state, setState] = useState<BoardType>({} as BoardType);
     const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
     const setBreadcrumb = useSetRecoilState(breadcrumbState);
 
     const handleChange = useCallback(
@@ -28,6 +29,7 @@ const Board = () => {
     );
 
     const api = useCallback(async (nextPage: number) => {
+        setLoading(true);
         try {
             const response = await instance<BoardType>(
                 `/department/${dId}/board/${bId}?skip=${nextPage}&limit=20`
@@ -46,12 +48,11 @@ const Board = () => {
                     },
                 });
                 setPage(response.data.curPage);
-            } else {
-                console.error(response.data);
             }
         } catch (error) {
             console.error(error);
         }
+        setLoading(false);
     }, []);
 
     useEffect(() => {
@@ -66,7 +67,7 @@ const Board = () => {
         if (!state.bname) api(page - 1);
     }, []);
 
-    return state ? (
+    return !loading ? (
         <Stack direction={"column"} spacing={1} width={"100%"}>
             <TitleSection title={state.bname} py={2} />
             <Divider sx={{ width: "100%" }} />
