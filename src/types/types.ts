@@ -60,13 +60,15 @@ export type BreadcrumbType = {
 export type KeywordType = string;
 
 export type PostType = {
-    content_id: number;
-    board_id: number;
-    title: string;
-    writer_name: string;
-    attach_cnt: number;
-    department_id: number;
-    body: string;
-    click_cnt: number;
-    update: string;
+    department: CommonType;
+    board: CommonType;
+    post: {
+        id: number;
+        body: string;
+        view: number;
+        title: string;
+        attachCnt: number;
+        uploadDate: string;
+        writer: string;
+    };
 };

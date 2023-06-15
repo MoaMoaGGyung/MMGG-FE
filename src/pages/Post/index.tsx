@@ -2,9 +2,10 @@ import HomeLayout from "../../components/HomeLayout";
 import { useParams } from "react-router-dom";
 import { Box, Grid, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { instance } from "../../store/store";
+import { breadcrumbState, instance } from "../../store/store";
 import { PostType } from "../../types/types";
 import PostSkeleton from "../../components/Skeletons/PostSkeleton";
+import { useSetRecoilState } from "recoil";
 
 const Post = () => {
     const { dId, bId, pId } = useParams() as {
@@ -13,6 +14,7 @@ const Post = () => {
         pId: string;
     };
     const [state, setState] = useState<PostType>();
+    const setBreadcrumbState = useSetRecoilState(breadcrumbState);
 
     const api = useCallback(async () => {
         try {
@@ -21,6 +23,14 @@ const Post = () => {
             );
             if (response.status === 200) {
                 setState(response.data);
+                setBreadcrumbState({
+                    department: response.data.department,
+                    board: response.data.board,
+                    post: {
+                        name: response.data.post.title,
+                        id: response.data.post.id,
+                    },
+                });
             } else {
                 console.error(response.data);
             }
@@ -44,11 +54,8 @@ const Post = () => {
                         borderColor: "#a4a8b8",
                     }}
                 >
-                    <Typography
-                        variant="h6"
-                        sx={{ fontWeight: "bold" }}
-                    >
-                        {state.title}
+                    <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                        {state.post.title}
                     </Typography>
                 </Box>
                 <Grid
@@ -83,7 +90,7 @@ const Post = () => {
                                 fontSize: 20,
                             }}
                         >
-                            {state.writer_name}
+                            {state.post.writer}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -119,18 +126,19 @@ const Post = () => {
                                 fontSize: 20,
                             }}
                         >
-                            {state.click_cnt}
+                            {state.post.view}
                         </Typography>
                     </Grid>
                 </Grid>
             </Box>
-            <Box width={"80%"}
+            <Box
+                width={"80%"}
                 dangerouslySetInnerHTML={{
-                    __html: state.body,
+                    __html: state.post.body,
                 }}
-            ></Box>
+            />
         </HomeLayout>
-    ): (
+    ) : (
         <PostSkeleton />
     );
 };
