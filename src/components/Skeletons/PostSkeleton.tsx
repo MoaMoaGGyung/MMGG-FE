@@ -2,7 +2,7 @@ import { Skeleton } from "@mui/material";
 import ArticleItem from "../ArticleItem";
 import Cell from "../Cell";
 
-function PostSkeletion() {
+function PostSkeleton() {
     return (
         <ArticleItem gtc="5% 10% 10% auto 10% 7%">
             {new Array(7).fill(0).map((_, index) => {
@@ -21,4 +21,4 @@ function PostSkeletion() {
     );
 }
 
-export default PostSkeletion;
+export default PostSkeleton;

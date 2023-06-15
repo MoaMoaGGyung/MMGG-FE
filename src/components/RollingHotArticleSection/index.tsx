@@ -10,7 +10,7 @@ import Cell from "../Cell";
 import { ArrowDropUp } from "@mui/icons-material";
 import { HotPostType } from "../../types/types";
 import axios from "axios";
-import PostSkeletion from "../Skeletons/PostSkeleton";
+import PostSkeleton from "../Skeletons/PostSkeleton";
 import { useNavigate } from "react-router-dom";
 
 interface SectionType {}
@@ -126,7 +126,7 @@ const RollingHotArticleSection = () => {
                     })}
                 </Box>
             ) : (
-                <PostSkeletion />
+                <PostSkeleton />
             )}
         </>
     );

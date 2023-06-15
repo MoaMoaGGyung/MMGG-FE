@@ -120,13 +120,46 @@ const Post = () => {
                             조회수
                         </Typography>
                     </Grid>
-                    <Grid item xs={2} sx={{ p: 2 }}>
+                    <Grid item xs={4} sx={{
+                            p: 2,
+                            borderRight: 2,
+                            borderColor: "#a4a8b8",
+                            textAlign: "left",
+                    }}>
                         <Typography
                             sx={{
                                 fontSize: 20,
                             }}
                         >
                             {state.post.view}
+                        </Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        xs={1.5}
+                        sx={{
+                            bgcolor: "#e1e3eb",
+                            p: 2,
+                            borderRight: 2,
+                            borderColor: "#a4a8b8",
+                            textAlign: "center",
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: 20,
+                            }}
+                        >
+                            날짜
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={4} sx={{ p: 2 }}>
+                        <Typography
+                            sx={{
+                                fontSize: 20,
+                            }}
+                        >
+                            {state.post.uploadDate}
                         </Typography>
                     </Grid>
                 </Grid>
