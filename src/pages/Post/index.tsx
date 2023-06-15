@@ -4,7 +4,6 @@ import { Box, Grid, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { instance } from "../../store/store";
 import { PostType } from "../../types/types";
-import PostSkeleton from "../../components/Skeletons/PostSkeleton";
 
 const Post = () => {
     const { dId, bId, pId } = useParams() as {
@@ -21,6 +20,7 @@ const Post = () => {
             );
             if (response.status === 200) {
                 setState(response.data);
+                console.log(response.data)
             } else {
                 console.error(response.data);
             }
@@ -42,13 +42,12 @@ const Post = () => {
                         p: 2,
                         borderBottom: 2,
                         borderColor: "#a4a8b8",
-                    }}
-                >
+                    }}>
                     <Typography
                         variant="h6"
                         sx={{ fontWeight: "bold" }}
                     >
-                        {state.title}
+                        {state.post.title}
                     </Typography>
                 </Box>
                 <Grid
@@ -83,7 +82,7 @@ const Post = () => {
                                 fontSize: 20,
                             }}
                         >
-                            {state.writer_name}
+                            {state.post.writer}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -124,7 +123,7 @@ const Post = () => {
                                 fontSize: 20,
                             }}
                         >
-                            {state.click_cnt}
+                            {state.post.view}
                         </Typography>
                     </Grid>
                     <Grid
@@ -152,19 +151,19 @@ const Post = () => {
                                 fontSize: 20,
                             }}
                         >
-                            {state.update.substr(0,10)} &nbsp; {state.update.substr(11)}
+                            {state.post.uploadDate}
                         </Typography>
                     </Grid>
                 </Grid>
             </Box>
             <Box width={"80%"}
                 dangerouslySetInnerHTML={{
-                    __html: state.body
+                    __html: state.post.body
                 }}
             ></Box>
         </HomeLayout>
     ): (
-        <PostSkeleton />
+        <PostDetailSkeleton />
     );
 };
 
