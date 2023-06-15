@@ -50,7 +50,7 @@ function HotArticles() {
     ];
     return (
         <HomeLayout>
-            <TitleSection title={"🔥 일일 Hot 공지"} />
+            <TitleSection title={"🔥 주간 Hot 공지"} />
             <Divider sx={{ width: "100%" }} />
             <ArticleTableHead items={theadTitle} gtc="5% 10% 10% auto 10% 7%" />
             <Box

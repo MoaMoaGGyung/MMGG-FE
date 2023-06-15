@@ -45,7 +45,9 @@ function Breadcrumb() {
                     {location.pathname.indexOf("board") > -1 &&
                         state.board?.name && (
                             <CustomLink
-                                to={`/department/${state.board.id}`}
+                                to={`/department/${
+                                    state.department!.id
+                                }/board/${state.board.id}`}
                                 sx={{
                                     "&:hover": {
                                         textDecoration: "underline",
@@ -60,7 +62,11 @@ function Breadcrumb() {
                     {location.pathname.indexOf("post") > -1 &&
                         state.post?.name && (
                             <CustomLink
-                                to={`/department/${state.post.id}`}
+                                to={`/department/${
+                                    state.department!.id
+                                }/board/${state.board!.id}/post/${
+                                    state.post!.id
+                                }`}
                                 sx={{
                                     "&:hover": {
                                         textDecoration: "underline",
