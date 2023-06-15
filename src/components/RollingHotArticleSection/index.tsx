@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import { hotPostAtom, instance } from "../../store/store";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TitleSection from "../TitleSection";
 import { Divider } from "@mui/material";
 import ArticleTableHead from "../ArticleTableHead";
@@ -8,9 +8,10 @@ import { Box } from "@mui/system";
 import ArticleItem from "../ArticleItem";
 import Cell from "../Cell";
 import { ArrowDropUp } from "@mui/icons-material";
-import PostSkeletion from "../Skeletons/PostSkeleton";
 import { HotPostType } from "../../types/types";
 import axios from "axios";
+import PostSkeletion from "../Skeletons/PostSkeleton";
+import { useNavigate } from "react-router-dom";
 
 interface SectionType {}
 
@@ -24,6 +25,7 @@ const RollingHotArticleSection = () => {
     const [hotPosts, setHotPosts] = useState<HotPostType[]>([]);
     const [globalHotState, setGlobalHotState] =
         useRecoilState<HotPostType[]>(hotPostAtom);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (globalHotState.length) {
@@ -98,6 +100,11 @@ const RollingHotArticleSection = () => {
                                 key={index}
                                 current={curItem}
                                 gtc="5% 10% 10% auto 10% 7%"
+                                onClick={() =>
+                                    navigate(
+                                        `/department/${department.id}/board/${board.id}/post/${post.id}`
+                                    )
+                                }
                             >
                                 <Cell>{index + 1}</Cell>
                                 <Cell sx={{ justifyContent: "left" }}>

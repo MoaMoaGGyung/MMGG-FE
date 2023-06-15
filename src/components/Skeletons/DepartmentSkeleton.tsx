@@ -1,6 +1,6 @@
 import { Divider, Skeleton, Stack } from "@mui/material";
 import ArticleTableHead from "../ArticleTableHead";
-import PostSkeletion from "./PostSkeletion";
+import PostSkeletion from "./PostSkeleton";
 
 function DepartmentSkeleton() {
     return (

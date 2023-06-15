@@ -5,14 +5,13 @@ export interface CommonType {
     name: string;
 }
 
-// export type PostType = {
-//     id: number;
-//     title: string;
-//     uploadDate: string;
-//     view: number;
-//     dailyFluctuation?: number;
-//     content?: string;
-// };
+export type PostPreviewType = {
+    id: number;
+    title: string;
+    uploadDate: string;
+    view: number;
+    dailyFluctuation: number;
+};
 
 export type BoardType = {
     dname: string;
@@ -34,7 +33,7 @@ export type DepartmentType = {
 export type HotPostType = {
     department: CommonType;
     board: CommonType;
-    post: Required<Omit<PostType, "content">>;
+    post: PostPreviewType;
 };
 
 export type RecentPostType = {
