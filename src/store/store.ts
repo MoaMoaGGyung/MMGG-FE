@@ -44,45 +44,9 @@ export const hotPostAtom = atom<HotPostType[]>({
     default: [],
 });
 
-export const hotPostState = selector<HotPostType[]>({
-    key: "hotPostState",
-    get: async ({ get }) => {
-        const currentData = get(hotPostAtom);
-        if (currentData.length === 0) {
-            const response = await instance.get(`/hot`);
-            return response.data;
-        }
-        return currentData;
-    },
-    set: ({ set }, newValue) => {
-        if (!(newValue instanceof DefaultValue)) {
-            set(hotPostAtom, newValue);
-        }
-    },
-});
-
 export const recentPostAtom = atom<RecentPostType[]>({
     key: "recentPostAtom",
     default: [],
-});
-
-export const recentPostState = selector<RecentPostType[]>({
-    key: "recentPostState",
-    get: async ({ get }) => {
-        let currentData = get(recentPostAtom);
-        console.info("recentPostState 호출");
-        if (currentData.length === 0) {
-            const response = await instance.get(`/recent-posts?limit=6`);
-            currentData = response.data;
-        }
-        console.debug(currentData);
-        return currentData;
-    },
-    set: ({ set }, newValue) => {
-        if (!(newValue instanceof DefaultValue)) {
-            set(recentPostAtom, newValue);
-        }
-    },
 });
 
 export const departmentAtom = atom<CommonType>({
@@ -129,4 +93,9 @@ export const breadcrumbState = selector<BreadcrumbType>({
             reset(postAtom);
         }
     },
+});
+
+export const keywordAtom = atom({
+    key: "keywordAtom",
+    default: "",
 });

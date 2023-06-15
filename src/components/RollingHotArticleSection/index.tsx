@@ -12,8 +12,7 @@ import { HotPostType } from "../../types/types";
 import axios from "axios";
 import PostSkeleton from "../Skeletons/PostSkeleton";
 import { useNavigate } from "react-router-dom";
-
-interface SectionType {}
+import ArticleItemDetail from "../ArticleItemDetail";
 
 const theadTitle = ["랭킹", "학과", "게시판", "제목", "날짜", "주간 변동량"];
 const source = axios.CancelToken.source();
@@ -96,24 +95,64 @@ const RollingHotArticleSection = () => {
                 >
                     {hotPosts.map(({ department, board, post }, index) => {
                         return (
-                            <ArticleItem
+                            <ArticleItemDetail
                                 key={index}
                                 current={curItem}
                                 gtc="5% 10% 10% auto 10% 7%"
-                                onClick={() =>
-                                    navigate(
-                                        `/department/${department.id}/board/${board.id}/post/${post.id}`
-                                    )
-                                }
                             >
                                 <Cell>{index + 1}</Cell>
-                                <Cell sx={{ justifyContent: "left" }}>
+                                <Cell
+                                    sx={{
+                                        justifyContent: "left",
+                                        paddingLeft: "6px",
+                                        borderRadius: "10px",
+                                        "&:hover": {
+                                            cursor: "pointer",
+                                            bgcolor: "#ccc",
+                                        },
+                                    }}
+                                    onClick={() => {
+                                        navigate(
+                                            `/department/${department.id}`
+                                        );
+                                    }}
+                                >
                                     {department.name}
                                 </Cell>
-                                <Cell sx={{ justifyContent: "left" }}>
+                                <Cell
+                                    sx={{
+                                        justifyContent: "left",
+                                        paddingLeft: "6px",
+                                        borderRadius: "10px",
+                                        "&:hover": {
+                                            cursor: "pointer",
+                                            bgcolor: "#ccc",
+                                        },
+                                    }}
+                                    onClick={() => {
+                                        navigate(
+                                            `/department/${department.id}/board/${board.id}`
+                                        );
+                                    }}
+                                >
                                     {board.name}
                                 </Cell>
-                                <Cell sx={{ justifyContent: "left" }}>
+                                <Cell
+                                    sx={{
+                                        justifyContent: "left",
+                                        paddingLeft: "6px",
+                                        borderRadius: "10px",
+                                        "&:hover": {
+                                            cursor: "pointer",
+                                            bgcolor: "#ccc",
+                                        },
+                                    }}
+                                    onClick={() =>
+                                        navigate(
+                                            `/department/${department.id}/board/${board.id}/post/${post.id}`
+                                        )
+                                    }
+                                >
                                     {post.title}
                                 </Cell>
                                 <Cell>{post.uploadDate}</Cell>
@@ -121,7 +160,7 @@ const RollingHotArticleSection = () => {
                                     <ArrowDropUp sx={{ color: "red" }} />{" "}
                                     {post.dailyFluctuation}
                                 </Cell>
-                            </ArticleItem>
+                            </ArticleItemDetail>
                         );
                     })}
                 </Box>

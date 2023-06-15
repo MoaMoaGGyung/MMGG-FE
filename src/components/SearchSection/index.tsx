@@ -1,15 +1,10 @@
 import { Search } from "@mui/icons-material";
 import { List, ListItem, ListItemIcon } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { useRecoilState } from "recoil";
 import { keywordAtom } from "../../store/store";
-
-interface SectionType {
-    keyword: string;
-    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}
 
 const Searchbar = styled.input`
     width: 100%;
@@ -19,8 +14,9 @@ const Searchbar = styled.input`
     }
 `;
 
-const SearchSection = ({ keyword, handleChange }: SectionType) => {
+const SearchSection = () => {
     console.info("SearchSection rendered!");
+    const [keyword, setKeyword] = useRecoilState(keywordAtom);
     return (
         <Box
             justifyContent={"center"}
@@ -39,7 +35,7 @@ const SearchSection = ({ keyword, handleChange }: SectionType) => {
                     <Searchbar
                         value={keyword}
                         placeholder="학과 검색"
-                        onChange={handleChange}
+                        onChange={(e) => setKeyword(e.target.value)}
                     />
                 </ListItem>
             </List>

@@ -7,17 +7,19 @@ import ArticleItem from "../../components/ArticleItem";
 import Cell from "../../components/Cell";
 import { ArrowDropUp } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { hotPostAtom, instance } from "../../store/store";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { breadcrumbState, hotPostAtom, instance } from "../../store/store";
 import { useCallback, useEffect, useState } from "react";
 import HotArticlesSkeleton from "../../components/Skeletons/HotArticlesSkeleton";
 import { HotPostType } from "../../types/types";
+import ArticleItemDetail from "../../components/ArticleItemDetail";
 
 function HotArticles() {
     const navigate = useNavigate();
     const [hotPosts, setHotPosts] = useState<HotPostType[]>([]);
     const [globalHotState, setGlobalHotState] =
         useRecoilState<HotPostType[]>(hotPostAtom);
+    const resetBreadcrumbState = useResetRecoilState(breadcrumbState);
 
     const api = useCallback(async () => {
         const response = await instance<HotPostType[]>("/hot");
@@ -30,6 +32,10 @@ function HotArticles() {
         } else {
             console.error(response.data);
         }
+    }, []);
+
+    useEffect(() => {
+        resetBreadcrumbState();
     }, []);
 
     useEffect(() => {
@@ -64,33 +70,71 @@ function HotArticles() {
                     hotPosts.map((props, index) => {
                         const { department, board, post } = props;
                         return (
-                            <ArticleItem
+                            <ArticleItemDetail
                                 key={index}
                                 gtc="5% 10% 10% auto 10% 7%"
-                                onClick={() =>
-                                    navigate(
-                                        `/department/${department.id}/board/${board.id}/post/${post.id}`
-                                    )
-                                }
                             >
                                 <Cell>{index + 1}</Cell>
-                                <Cell sx={{ justifyContent: "left" }}>
+                                <Cell
+                                    sx={{
+                                        justifyContent: "left",
+                                        paddingLeft: "6px",
+                                        borderRadius: "10px",
+                                        "&:hover": {
+                                            cursor: "pointer",
+                                            bgcolor: "#ccc",
+                                        },
+                                    }}
+                                    onClick={() => {
+                                        navigate(
+                                            `/department/${department.id}`
+                                        );
+                                    }}
+                                >
                                     {department.name}
                                 </Cell>
-                                <Cell sx={{ justifyContent: "left" }}>
+                                <Cell
+                                    sx={{
+                                        justifyContent: "left",
+                                        paddingLeft: "6px",
+                                        borderRadius: "10px",
+                                        "&:hover": {
+                                            cursor: "pointer",
+                                            bgcolor: "#ccc",
+                                        },
+                                    }}
+                                    onClick={() => {
+                                        navigate(
+                                            `/department/${department.id}/board/${board.id}`
+                                        );
+                                    }}
+                                >
                                     {board.name}
                                 </Cell>
-                                <Cell sx={{ justifyContent: "left" }}>
+                                <Cell
+                                    sx={{
+                                        justifyContent: "left",
+                                        paddingLeft: "6px",
+                                        borderRadius: "10px",
+                                        "&:hover": {
+                                            cursor: "pointer",
+                                            bgcolor: "#ccc",
+                                        },
+                                    }}
+                                    onClick={() =>
+                                        navigate(
+                                            `/department/${department.id}/board/${board.id}/post/${post.id}`
+                                        )
+                                    }
+                                >
                                     {post.title}
                                 </Cell>
-                                <Cell>
-                                    {post.uploadDate.toString().slice(0, 10)}
-                                </Cell>
+                                <Cell>{post.uploadDate}</Cell>
                                 <Cell>
                                     <ArrowDropUp sx={{ color: "red" }} />{" "}
                                     {post.dailyFluctuation}
                                 </Cell>
-                            </ArticleItem>
+                            </ArticleItemDetail>
                         );
                     })
                 ) : (

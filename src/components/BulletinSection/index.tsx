@@ -4,34 +4,34 @@ import CustomLink from "../CustomLink";
 import React, { useCallback, useEffect, useState } from "react";
 import TitleSection from "../TitleSection";
 import { Masonry } from "@mui/lab";
-import { instance } from "../../store/store";
+import { instance, keywordAtom, recentPostAtom } from "../../store/store";
 import { debounce } from "lodash";
 import { RecentPostType } from "../../types/types";
 import CardSkeleton from "../Skeletons/CardSkeleton";
 import axios from "axios";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-interface SectionType {
-    keyword: string;
-}
 const source = axios.CancelToken.source();
 
-const BulletinSection = ({ keyword }: SectionType) => {
+const BulletinSection = () => {
     console.info("BulletinSection rendered!");
-    const [recentPosts, setRecentPosts] = useState<RecentPostType[]>([]);
+    const keyword = useRecoilValue(keywordAtom);
+    const [recentPosts, setRecentPosts] = useRecoilState(recentPostAtom);
     const [copy, setCopy] = useState<RecentPostType[]>([]);
     const [loading, setLoading] = useState(false);
     const searchKeyword = useCallback(
         debounce((keyword: string, state: RecentPostType[]) => {
-            const result = state.filter(({ department }) =>
-                !keyword ? true : department.name.indexOf(keyword) > -1
-            );
+            const result = !keyword
+                ? state
+                : state.filter(
+                      ({ department }) => department.name.indexOf(keyword) > -1
+                  );
             setCopy(result);
         }, 300),
         []
     );
     useEffect(() => {
         if (recentPosts.length) {
-            console.debug(keyword);
             searchKeyword(keyword, recentPosts);
         }
     }, [keyword, recentPosts]);
@@ -63,7 +63,6 @@ const BulletinSection = ({ keyword }: SectionType) => {
                 setLoading(false);
             }
         };
-
         if (!recentPosts.length) api();
         return () => {
             loading && source.cancel();

@@ -73,4 +73,4 @@ export type PostDetailType = {
     uploadDate: string;
     view: number;
     writer: string;
-}
+};

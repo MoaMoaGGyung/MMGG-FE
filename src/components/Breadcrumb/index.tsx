@@ -7,7 +7,6 @@ import Cell from "../Cell";
 
 function Breadcrumb() {
     const state = useRecoilValue(breadcrumbState);
-    console.debug(location.pathname);
 
     return (
         <Box
