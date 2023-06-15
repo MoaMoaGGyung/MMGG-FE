@@ -100,7 +100,12 @@ const Department = () => {
                                                     }
                                                 >
                                                     <Cell>{pId}</Cell>
-                                                    <Cell>{title}</Cell>
+                                                    <Cell
+                                                        justifyContent={"left"}
+                                                        paddingLeft={5}
+                                                    >
+                                                        {title}
+                                                    </Cell>
                                                     <Cell>{uploadDate}</Cell>
                                                     <Cell>{view}</Cell>
                                                 </ArticleItem>

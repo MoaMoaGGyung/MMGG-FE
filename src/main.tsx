@@ -7,7 +7,6 @@ import HotArticles from "./pages/HotArticles";
 import Department from "./pages/Department";
 import Board from "./pages/Board";
 import Detail from "./pages/Detail";
-import axios from "axios";
 import Post from "./pages/Post";
 
 const router = createBrowserRouter([
@@ -41,7 +40,7 @@ const router = createBrowserRouter([
             {
                 path: "/department/:dId/board/:bId/post/:pId",
                 element: <Post />,
-            }
+            },
         ],
     },
 ]);

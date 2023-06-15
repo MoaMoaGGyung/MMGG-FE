@@ -98,10 +98,10 @@ const Board = () => {
                             onClick={() => navigate(`./post/${id}`)}
                         >
                             <Cell>{id}</Cell>
-                            <Cell>{title}</Cell>
-                            <Cell justifyContent="flex-start">
-                                {uploadDate}
+                            <Cell justifyContent={"left"} paddingLeft={5}>
+                                {title}
                             </Cell>
+                            <Cell>{uploadDate}</Cell>
                             <Cell>{view}</Cell>
                         </ArticleItem>
                     );

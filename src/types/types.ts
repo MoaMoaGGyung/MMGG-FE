@@ -18,7 +18,7 @@ export type BoardType = {
     bname: string;
     totalPage: number;
     curPage: number;
-    posts: PostType[];
+    posts: Omit<PostPreviewType, "dailyFluctuation">[];
 };
 
 export type DepartmentType = {
@@ -26,7 +26,7 @@ export type DepartmentType = {
     boards: {
         name: "";
         id: 0;
-        posts: PostType[];
+        posts: Omit<PostPreviewType, "dailyFluctuation">[];
     }[];
 };
 
@@ -66,6 +66,7 @@ export type PostType = {
 };
 
 export type PostDetailType = {
+    base_url: string;
     attachCnt: number;
     body: string;
     id: number;

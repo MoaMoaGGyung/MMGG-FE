@@ -19,7 +19,6 @@ import {
     alignmentTypeState,
     departmentAtom,
 } from "../../store/store";
-import CustomLink from "../../components/CustomLink";
 import DepartmentSkeleton from "../../components/Skeletons/DetailSkeleton";
 
 type AlignmentType = "date" | "view";
@@ -53,19 +52,14 @@ const Detail = () => {
                 {!department.name ? (
                     <DepartmentSkeleton />
                 ) : (
-                    <CustomLink
-                        to={`/department/${department.id}`}
-                        sx={{ color: "black" }}
+                    <Typography
+                        variant="h4"
+                        component={"span"}
+                        fontWeight={600}
+                        fontFamily={"Noto Sans KR"}
                     >
-                        <Typography
-                            variant="h4"
-                            component={"span"}
-                            fontWeight={600}
-                            fontFamily={"Noto Sans KR"}
-                        >
-                            {department.name}
-                        </Typography>
-                    </CustomLink>
+                        {department.name}
+                    </Typography>
                 )}
 
                 <Stack

@@ -3,7 +3,6 @@ import ArticleTableHead from "../../components/ArticleTableHead";
 import HomeLayout from "../../components/HomeLayout";
 import TitleSection from "../../components/TitleSection";
 import { Box } from "@mui/system";
-import ArticleItem from "../../components/ArticleItem";
 import Cell from "../../components/Cell";
 import { ArrowDropUp } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";

@@ -5,7 +5,6 @@ import TitleSection from "../TitleSection";
 import { Divider } from "@mui/material";
 import ArticleTableHead from "../ArticleTableHead";
 import { Box } from "@mui/system";
-import ArticleItem from "../ArticleItem";
 import Cell from "../Cell";
 import { ArrowDropUp } from "@mui/icons-material";
 import { HotPostType } from "../../types/types";

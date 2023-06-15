@@ -1,56 +1,8 @@
-import HomeLayout from "../../components/HomeLayout";
-import { useParams } from "react-router-dom";
-import { Box, Grid, Typography } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
-import { breadcrumbState, instance } from "../../store/store";
-import { PostType } from "../../types/types";
-import { useSetRecoilState } from "recoil";
-import { produce } from "immer";
-import PostDetailSkeleton from "../../components/Skeletons/PostDetailSkeleton";
+import HomeLayout from "../HomeLayout";
+import { Box, Grid, Skeleton, Typography } from "@mui/material";
 
-const Post = () => {
-    const { dId, bId, pId } = useParams() as {
-        dId: string;
-        bId: string;
-        pId: string;
-    };
-    const [state, setState] = useState<PostType>();
-    const setBreadcrumbState = useSetRecoilState(breadcrumbState);
-
-    const api = useCallback(async () => {
-        try {
-            const response = await instance<PostType>(
-                `/department/${dId}/board/${bId}/post/${pId}`
-            );
-            if (response.status === 200) {
-                const hostInjectedData = produce(response.data, (draft) => {
-                    draft.post.body = draft.post.body.replaceAll(
-                        'src="',
-                        `src="${draft.post.base_url}`
-                    );
-                });
-                setState(hostInjectedData);
-                setBreadcrumbState({
-                    department: response.data.department,
-                    board: response.data.board,
-                    post: {
-                        name: response.data.post.title,
-                        id: response.data.post.id,
-                    },
-                });
-            } else {
-                console.error(response.data);
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    }, []);
-
-    useEffect(() => {
-        api();
-    }, []);
-
-    return state ? (
+function PostDetailSkeleton() {
+    return (
         <HomeLayout>
             <Box width={"80%"}>
                 <Box
@@ -61,9 +13,7 @@ const Post = () => {
                         borderColor: "#a4a8b8",
                     }}
                 >
-                    <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                        {state.post.title}
-                    </Typography>
+                    <Skeleton width={"80%"} height={30} />
                 </Box>
                 <Grid
                     container
@@ -92,13 +42,7 @@ const Post = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={8} sx={{ p: 2 }}>
-                        <Typography
-                            sx={{
-                                fontSize: 20,
-                            }}
-                        >
-                            {state.post.writer}
-                        </Typography>
+                        <Skeleton width={150} height={30} />
                     </Grid>
                 </Grid>
                 <Grid
@@ -137,13 +81,7 @@ const Post = () => {
                             textAlign: "left",
                         }}
                     >
-                        <Typography
-                            sx={{
-                                fontSize: 20,
-                            }}
-                        >
-                            {state.post.view}
-                        </Typography>
+                        <Skeleton width={150} height={30} />
                     </Grid>
                     <Grid
                         item
@@ -165,26 +103,34 @@ const Post = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={4} sx={{ p: 2 }}>
-                        <Typography
-                            sx={{
-                                fontSize: 20,
-                            }}
-                        >
-                            {state.post.uploadDate}
-                        </Typography>
+                        <Skeleton width={150} height={30} />
                     </Grid>
                 </Grid>
             </Box>
-            <Box
-                width={"80%"}
-                dangerouslySetInnerHTML={{
-                    __html: state.post.body,
-                }}
-            />
+            <Box width={"80%"}>
+                {new Array(4).fill(0).map((_, index) => (
+                    <Skeleton
+                        variant="text"
+                        width={`${Math.random() * 100}%`}
+                        key={index}
+                    />
+                ))}
+                <Skeleton
+                    variant="rounded"
+                    width={"50%"}
+                    height={"400px"}
+                    sx={{ marginY: "10px" }}
+                />
+                {new Array(7).fill(0).map((_, index) => (
+                    <Skeleton
+                        variant="text"
+                        width={`${Math.random() * 100}%`}
+                        key={index}
+                    />
+                ))}
+            </Box>
         </HomeLayout>
-    ) : (
-        <PostDetailSkeleton />
     );
-};
+}
 
-export default Post;
+export default PostDetailSkeleton;
