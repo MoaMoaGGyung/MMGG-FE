@@ -8,7 +8,7 @@ import { Box } from "@mui/system";
 import ArticleItem from "../ArticleItem";
 import Cell from "../Cell";
 import { ArrowDropUp } from "@mui/icons-material";
-import PostSkeletion from "../Skeletons/PostSkeletion";
+import PostSkeletion from "../Skeletons/PostSkeleton";
 import { HotPostType } from "../../types/types";
 import axios from "axios";
 
