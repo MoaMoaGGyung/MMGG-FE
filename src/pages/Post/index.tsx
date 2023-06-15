@@ -113,7 +113,12 @@ const Post = () => {
                             조회수
                         </Typography>
                     </Grid>
-                    <Grid item xs={2} sx={{ p: 2 }}>
+                    <Grid item xs={4} sx={{
+                            p: 2,
+                            borderRight: 2,
+                            borderColor: "#a4a8b8",
+                            textAlign: "left",
+                    }}>
                         <Typography
                             sx={{
                                 fontSize: 20,
@@ -122,11 +127,39 @@ const Post = () => {
                             {state.click_cnt}
                         </Typography>
                     </Grid>
+                    <Grid
+                        item
+                        xs={1.5}
+                        sx={{
+                            bgcolor: "#e1e3eb",
+                            p: 2,
+                            borderRight: 2,
+                            borderColor: "#a4a8b8",
+                            textAlign: "center",
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: 20,
+                            }}
+                        >
+                            날짜
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={4} sx={{ p: 2 }}>
+                        <Typography
+                            sx={{
+                                fontSize: 20,
+                            }}
+                        >
+                            {state.update.substr(0,10)} &nbsp; {state.update.substr(11)}
+                        </Typography>
+                    </Grid>
                 </Grid>
             </Box>
             <Box width={"80%"}
                 dangerouslySetInnerHTML={{
-                    __html: state.body,
+                    __html: state.body
                 }}
             ></Box>
         </HomeLayout>
