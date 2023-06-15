@@ -1,7 +1,7 @@
 import { Divider, Skeleton } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import ArticleTableHead from "../ArticleTableHead";
-import PostSkeletion from "./PostSkeletion";
+import PostSkeletion from "./PostSkeleton";
 
 function BoardSkeleton() {
     return (

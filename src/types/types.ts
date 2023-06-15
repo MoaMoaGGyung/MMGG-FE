@@ -71,7 +71,3 @@ export type PostType = {
     click_cnt: number;
     update: string;
 };
-
-export type BodyType = {
-    body: string;
-}

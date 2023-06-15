@@ -1,4 +1,4 @@
-import PostSkeletion from "./PostSkeletion";
+import PostSkeletion from "./PostSkeleton";
 
 function HotArticlesSkeleton() {
     return (
