@@ -59,3 +59,7 @@ export type BreadcrumbType = {
 };
 
 export type KeywordType = string;
+
+// export type PostType = {
+//     department: CommonType;
+// };

@@ -1,11 +1,40 @@
 import HomeLayout from "../../components/HomeLayout";
-import TitleSection from "../../components/TitleSection";
 import MockPost from "../../mock/Post.json";
 import { useParams } from "react-router-dom";
 import { Box, Grid, Typography } from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
+import { alignmentState, departmentAtom, instance } from "../../store/store";
+import { CommonType, PostType } from "../../types/types";
 
 const Post = () => {
     const { postId } = useParams();
+    const { dId, bId, pId } = useParams() as {
+        dId: string;
+        bId: string;
+        pId: string;
+    };
+    const [post, setPost] = useState<PostType>();
+
+    const api = useCallback(async () => {
+        try {
+            const response = await instance<PostType>(
+                `/department/${dId}/board/${bId}/post/${pId}`
+            );
+            if (response.status === 200) {
+                // setPost(response.data);
+                console.log(response.data);
+            } else {
+                console.error(response.data);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }, []);
+
+    useEffect(() => {
+        api();
+    }, []);
+
     return (
         <HomeLayout>
             {MockPost.filter(
