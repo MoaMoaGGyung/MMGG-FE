@@ -5,14 +5,14 @@ export interface CommonType {
     name: string;
 }
 
-export type PostType = {
-    id: number;
-    title: string;
-    uploadDate: string;
-    view: number;
-    dailyFluctuation?: number;
-    content?: string;
-};
+// export type PostType = {
+//     id: number;
+//     title: string;
+//     uploadDate: string;
+//     view: number;
+//     dailyFluctuation?: number;
+//     content?: string;
+// };
 
 export type BoardType = {
     dname: string;
@@ -60,6 +60,18 @@ export type BreadcrumbType = {
 
 export type KeywordType = string;
 
-// export type PostType = {
-//     department: CommonType;
-// };
+export type PostType = {
+    content_id: number;
+    board_id: number;
+    title: string;
+    writer_name: string;
+    attach_cnt: number;
+    department_id: number;
+    body: string;
+    click_cnt: number;
+    update: string;
+};
+
+export type BodyType = {
+    body: string;
+}

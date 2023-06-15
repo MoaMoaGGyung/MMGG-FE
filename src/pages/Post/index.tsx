@@ -1,19 +1,22 @@
 import HomeLayout from "../../components/HomeLayout";
-import MockPost from "../../mock/Post.json";
 import { useParams } from "react-router-dom";
 import { Box, Grid, Typography } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { alignmentState, departmentAtom, instance } from "../../store/store";
-import { CommonType, PostType } from "../../types/types";
+import { BodyType, PostType } from "../../types/types";
+import BoardSkeleton from "../../components/Skeletons/BoardSkeleton";
 
 const Post = () => {
-    const { postId } = useParams();
     const { dId, bId, pId } = useParams() as {
         dId: string;
         bId: string;
         pId: string;
     };
-    const [post, setPost] = useState<PostType>();
+    const [state, setState] = useState<PostType>();
+    const [body, setBody] = useState<String>('');
+
+    const test2 = "<div>hello</div>"
+    const test = "<div class=\"fr-view\"><p><img src=\"/_attach/image/editor_image/2023/06/WQedyxvuWUCFxdumwMZS0.jpg\" class=\"fr-fic fr-dib\" data-path=\"/_attach/image/editor_image/2023/06/WQedyxvuWUCFxdumwMZS0.jpg\" data-size=\"2786646\" data-success=\"true\" data-file_name=\"WQedyxvuWUCFxdumwMZS0.jpg\" data-width=\"1199\" data-alt=\"screen shot\" data-height=\"1698\"><img src=\"/_attach/image/editor_image/2023/06/GKhUpOcamXqLPWOkmPlC0.jpg\" class=\"fr-fic fr-dib\" data-path=\"/_attach/image/editor_image/2023/06/GKhUpOcamXqLPWOkmPlC0.jpg\" data-size=\"2667094\" data-success=\"true\" data-file_name=\"GKhUpOcamXqLPWOkmPlC0.jpg\" data-width=\"1199\" data-alt=\"screen shot\" data-height=\"1698\"></p></div>"
 
     const api = useCallback(async () => {
         try {
@@ -23,6 +26,9 @@ const Post = () => {
             if (response.status === 200) {
                 // setPost(response.data);
                 console.log(response.data);
+                setState(response.data);
+                setBody(String(response.data.body));
+                console.log((response.data.body))
             } else {
                 console.error(response.data);
             }
@@ -35,12 +41,15 @@ const Post = () => {
         api();
     }, []);
 
-    return (
+    return <div>
+        {test}
+        <div dangerouslySetInnerHTML={{__html: test2}}></div>
+        <div dangerouslySetInnerHTML={{__html: test}}></div>
+    </div>;
+/*
+    return state ? (
         <HomeLayout>
-            {MockPost.filter(
-                ({ article_no }) => article_no === Number(postId)
-            ).map(({ article_title, article_text, writer_nm, click_cnt }) => {
-                return (
+        
                     <>
                         <Box width={"80%"}>
                             <Box
@@ -55,7 +64,7 @@ const Post = () => {
                                     variant="h6"
                                     sx={{ fontWeight: "bold" }}
                                 >
-                                    {article_title}
+                                    {state?.title}
                                 </Typography>
                             </Box>
                             <Grid
@@ -90,7 +99,7 @@ const Post = () => {
                                             fontSize: 20,
                                         }}
                                     >
-                                        {writer_nm}
+                                        {state?.writer_name}
                                     </Typography>
                                 </Grid>
                             </Grid>
@@ -126,22 +135,23 @@ const Post = () => {
                                             fontSize: 20,
                                         }}
                                     >
-                                        {click_cnt}
+                                        {state.click_cnt}
                                     </Typography>
                                 </Grid>
                             </Grid>
                         </Box>
                         <Box
-                            key={Number(postId)}
                             dangerouslySetInnerHTML={{
-                                __html: article_text,
+                                __html: state.body.div,
                             }}
                         ></Box>
                     </>
-                );
-            })}
+
         </HomeLayout>
+    ): (
+        <BoardSkeleton />
     );
+    */
 };
 
 export default Post;
