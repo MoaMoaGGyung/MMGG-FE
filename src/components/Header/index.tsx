@@ -2,17 +2,18 @@ import { Menu, Person } from "@mui/icons-material";
 import {
     AppBar,
     Box,
+    Button,
     Drawer,
     IconButton,
+    Link,
     Toolbar,
     Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 function Header() {
     const [open, setOpen] = useState(false);
-    const navigate = useNavigate();
     return (
         <>
             <AppBar position="static" sx={{ bgcolor: "#FFE0B1" }}>
@@ -33,16 +34,15 @@ function Header() {
                         sx={{
                             width: "100%",
                             textAlign: "center",
-                            color: "#464646",
-                            fontFamily: "Bruno Ace SC, cursive",
-                            fontSize: "clamp(1rem, 3vw, 2rem)",
-                            "&:hover": {
-                                cursor: "pointer",
+                            "& a": {
+                                color: "#464646",
+                                textDecoration: "none",
+                                fontFamily: "Bruno Ace SC, cursive",
+                                fontSize: "clamp(1rem, 3vw, 2rem)",
                             },
                         }}
-                        onClick={() => navigate("/")}
                     >
-                        CNU NOTICE HUB
+                        <RouterLink to="/">CNU NOTICE HUB</RouterLink>
                     </Box>
                     <IconButton
                         size="large"
