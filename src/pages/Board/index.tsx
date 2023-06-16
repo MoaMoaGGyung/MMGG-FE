@@ -63,6 +63,8 @@ const Board = () => {
         window.scrollTo(0, 0);
         if (state.curPage && state.curPage !== page) {
             api(page - 1);
+            searchParams.set("page", `${page}`);
+            setSearchParams(searchParams);
         }
     }, [page]);
 
