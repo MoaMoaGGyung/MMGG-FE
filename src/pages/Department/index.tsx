@@ -5,7 +5,7 @@ import ArticleTableHead from "../../components/ArticleTableHead";
 import ArticleItem from "../../components/ArticleItem";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { alignmentState, departmentAtom, instance } from "../../store/store";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DepartmentType } from "../../types/types";
 import DepartmentSkeleton from "../../components/Skeletons/DepartmentSkeleton";
@@ -13,7 +13,6 @@ import DepartmentSkeleton from "../../components/Skeletons/DepartmentSkeleton";
 const Department = () => {
     console.info("Department rendered!");
     const { dId } = useParams() as { dId: string };
-    const navigate = useNavigate();
     const [dState, setDState] = useState<DepartmentType>();
     const { type, direction } = useRecoilValue(alignmentState);
     const [loading, setLoading] = useState(false);
@@ -33,7 +32,7 @@ const Department = () => {
             }
             setLoading(false);
         };
-        api();
+        if (dState?.department.id !== parseInt(dId)) api();
     }, []);
 
     return (
@@ -51,9 +50,8 @@ const Department = () => {
                                 <TitleSection
                                     title={name}
                                     py={2}
-                                    link={`./board/${bId}`}
+                                    link={`./board/${bId}?page=1`}
                                     linkLabel="더 보기"
-                                    onLinkClicked={() => {}}
                                 />
                                 <Divider sx={{ width: "100%" }} />
                                 <ArticleTableHead
@@ -90,25 +88,32 @@ const Department = () => {
                                             view,
                                         }) => {
                                             return (
-                                                <ArticleItem
-                                                    key={pId}
-                                                    gtc="5% auto 10% 7%"
-                                                    onClick={() =>
-                                                        navigate(
-                                                            `/department/${dId}/board/${bId}/post/${pId}`
-                                                        )
-                                                    }
+                                                <Link
+                                                    to={`/department/${dId}/board/${bId}/post/${pId}`}
+                                                    style={{
+                                                        color: "black",
+                                                        textDecoration: "none",
+                                                    }}
                                                 >
-                                                    <Cell>{pId}</Cell>
-                                                    <Cell
-                                                        justifyContent={"left"}
-                                                        paddingLeft={5}
+                                                    <ArticleItem
+                                                        key={pId}
+                                                        gtc="5% auto 10% 7%"
                                                     >
-                                                        {title}
-                                                    </Cell>
-                                                    <Cell>{uploadDate}</Cell>
-                                                    <Cell>{view}</Cell>
-                                                </ArticleItem>
+                                                        <Cell>{pId}</Cell>
+                                                        <Cell
+                                                            justifyContent={
+                                                                "left"
+                                                            }
+                                                            paddingLeft={5}
+                                                        >
+                                                            {title}
+                                                        </Cell>
+                                                        <Cell>
+                                                            {uploadDate}
+                                                        </Cell>
+                                                        <Cell>{view}</Cell>
+                                                    </ArticleItem>
+                                                </Link>
                                             );
                                         }
                                     )}

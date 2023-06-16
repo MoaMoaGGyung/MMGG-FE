@@ -1,7 +1,7 @@
 import { Divider, Skeleton } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import ArticleTableHead from "../ArticleTableHead";
-import PostSkeleton from "./PostSkeleton";
+import SimplePostSkeleton from "./SimplePostSkeleton";
 
 function BoardSkeleton() {
     return (
@@ -17,8 +17,8 @@ function BoardSkeleton() {
                 items={["번호", "제목", "날짜", "조회수"]}
                 gtc={"5% auto 10% 7%"}
             />
-            {new Array(20).fill(0).map((_, index) => {
-                return <PostSkeleton key={index} />;
+            {new Array(10).fill(0).map((_, index) => {
+                return <SimplePostSkeleton key={index} />;
             })}
             <Box
                 flexDirection={"row"}

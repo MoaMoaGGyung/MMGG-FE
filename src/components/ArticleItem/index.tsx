@@ -9,12 +9,7 @@ interface CurArticleType extends BoxProps {
     children: ReactNode;
 }
 
-function ArticleItem({
-    current,
-    gtc = "5% 10% 10% auto 10% 7%",
-    onClick,
-    children,
-}: CurArticleType) {
+function ArticleItem({ current, gtc, onClick, children }: CurArticleType) {
     return (
         <Container current={current} gtc={gtc} onClick={onClick}>
             {children}

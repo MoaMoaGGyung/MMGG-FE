@@ -7,7 +7,7 @@ import ArticleTableHead from "../../components/ArticleTableHead";
 import ArticleItem from "../../components/ArticleItem";
 import Cell from "../../components/Cell";
 import TitleSection from "../../components/TitleSection";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { BoardType } from "../../types/types";
 import BoardSkeleton from "../../components/Skeletons/BoardSkeleton";
 
@@ -15,9 +15,13 @@ const Board = () => {
     console.info("Board Rendered!");
     const { type, direction } = useRecoilValue(alignmentState);
     const { dId, bId } = useParams() as { dId: string; bId: string };
+    const [searchParams, setSearchParams] = useSearchParams();
+    const getPage = useCallback(() => {
+        return parseInt(searchParams.get("page") as string);
+    }, []);
+    const [page, setPage] = useState(getPage);
     const navigate = useNavigate();
     const [state, setState] = useState<BoardType>({} as BoardType);
-    const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const setBreadcrumb = useSetRecoilState(breadcrumbState);
 

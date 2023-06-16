@@ -1,6 +1,6 @@
 import { Divider, Skeleton, Stack } from "@mui/material";
 import ArticleTableHead from "../ArticleTableHead";
-import PostSkeleton from "./PostSkeleton";
+import SimplePostSkeleton from "./SimplePostSkeleton";
 
 function DepartmentSkeleton() {
     return (
@@ -25,7 +25,7 @@ function DepartmentSkeleton() {
                             gtc={"5% auto 10% 7%"}
                         />
                         {new Array(6).fill(0).map((_, index) => {
-                            return <PostSkeleton key={index} />;
+                            return <SimplePostSkeleton key={index} />;
                         })}
                     </Stack>
                 );

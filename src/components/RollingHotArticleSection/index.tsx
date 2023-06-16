@@ -12,9 +12,31 @@ import axios from "axios";
 import PostSkeleton from "../Skeletons/PostSkeleton";
 import { useNavigate } from "react-router-dom";
 import ArticleItemDetail from "../ArticleItemDetail";
+import CustomLink from "../CustomLink";
 
 const theadTitle = ["랭킹", "학과", "게시판", "제목", "날짜", "주간 변동량"];
 const source = axios.CancelToken.source();
+
+export const RouteFontStyle = {
+    fontSize: 15,
+    fontWeight: 400,
+    color: "black",
+    "&:hover": {
+        textDecoration: "none",
+        color: "black",
+        cursor: "pointer",
+    },
+};
+
+export const RouteCellStyle = {
+    justifyContent: "left",
+    paddingLeft: "6px",
+    borderRadius: "10px",
+    "&:hover": {
+        cursor: "pointer",
+        bgcolor: "#ccc",
+    },
+};
 
 const RollingHotArticleSection = () => {
     // console.info("RollingHotArticleSection rendered!");
@@ -100,59 +122,29 @@ const RollingHotArticleSection = () => {
                                 gtc="5% 10% 10% auto 10% 7%"
                             >
                                 <Cell>{index + 1}</Cell>
-                                <Cell
-                                    sx={{
-                                        justifyContent: "left",
-                                        paddingLeft: "6px",
-                                        borderRadius: "10px",
-                                        "&:hover": {
-                                            cursor: "pointer",
-                                            bgcolor: "#ccc",
-                                        },
-                                    }}
-                                    onClick={() => {
-                                        navigate(
-                                            `/department/${department.id}`
-                                        );
-                                    }}
-                                >
-                                    {department.name}
+                                <Cell sx={RouteCellStyle}>
+                                    <CustomLink
+                                        to={`/department/${department.id}`}
+                                        sx={RouteFontStyle}
+                                    >
+                                        {department.name}
+                                    </CustomLink>
                                 </Cell>
-                                <Cell
-                                    sx={{
-                                        justifyContent: "left",
-                                        paddingLeft: "6px",
-                                        borderRadius: "10px",
-                                        "&:hover": {
-                                            cursor: "pointer",
-                                            bgcolor: "#ccc",
-                                        },
-                                    }}
-                                    onClick={() => {
-                                        navigate(
-                                            `/department/${department.id}/board/${board.id}`
-                                        );
-                                    }}
-                                >
-                                    {board.name}
+                                <Cell sx={RouteCellStyle}>
+                                    <CustomLink
+                                        to={`/department/${department.id}/board/${board.id}?page=1`}
+                                        sx={RouteFontStyle}
+                                    >
+                                        {board.name}
+                                    </CustomLink>
                                 </Cell>
-                                <Cell
-                                    sx={{
-                                        justifyContent: "left",
-                                        paddingLeft: "6px",
-                                        borderRadius: "10px",
-                                        "&:hover": {
-                                            cursor: "pointer",
-                                            bgcolor: "#ccc",
-                                        },
-                                    }}
-                                    onClick={() =>
-                                        navigate(
-                                            `/department/${department.id}/board/${board.id}/post/${post.id}`
-                                        )
-                                    }
-                                >
-                                    {post.title}
+                                <Cell sx={RouteCellStyle}>
+                                    <CustomLink
+                                        to={`/department/${department.id}/board/${board.id}/post/${post.id}`}
+                                        sx={RouteFontStyle}
+                                    >
+                                        {post.title}
+                                    </CustomLink>
                                 </Cell>
                                 <Cell>{post.uploadDate}</Cell>
                                 <Cell>
