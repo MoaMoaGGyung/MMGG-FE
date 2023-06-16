@@ -8,8 +8,8 @@ import {
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import BulletinSection from "../BulletinSection";
 import DepartmentOnlySection from "../DepartmentOnlySection";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { keywordAtom, tabAtom } from "../../store/store";
+import { useRecoilState } from "recoil";
+import { tabAtom } from "../../store/store";
 
 function Tabs() {
     console.info("Tabs rendered!");
