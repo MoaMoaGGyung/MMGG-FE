@@ -1,0 +1,112 @@
+[
+    {
+        "department": { "name": "diam id", "id": 53 },
+        "board": { "name": "turpis", "id": 45 },
+        "post": {
+            "id": 34,
+            "title": "lacinia eget tincidunt eget tempus",
+            "uploadDate": "2022-03-20",
+            "view": 3909,
+            "dailyFluctuation": 467
+        }
+    },
+    {
+        "department": { "name": "ac", "id": 25 },
+        "board": { "name": "ante", "id": 86 },
+        "post": {
+            "id": 33,
+            "title": "quisque arcu libero rutrum ac lobortis vel dapibus",
+            "uploadDate": "2023-05-15",
+            "view": 6899,
+            "dailyFluctuation": 155
+        }
+    },
+    {
+        "department": { "name": "diam vitae", "id": 37 },
+        "board": { "name": "augue", "id": 94 },
+        "post": {
+            "id": 51,
+            "title": "vestibulum vestibulum ante ipsum primis",
+            "uploadDate": "2022-04-25",
+            "view": 5765,
+            "dailyFluctuation": 490
+        }
+    },
+    {
+        "department": { "name": "ante", "id": 2 },
+        "board": { "name": "vitae", "id": 32 },
+        "post": {
+            "id": 12,
+            "title": "donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin",
+            "uploadDate": "2022-04-01",
+            "view": 5985,
+            "dailyFluctuation": 57
+        }
+    },
+    {
+        "department": { "name": "odio", "id": 56 },
+        "board": { "name": "elit", "id": 62 },
+        "post": {
+            "id": 31,
+            "title": "sit amet cursus id turpis",
+            "uploadDate": "2023-02-19",
+            "view": 5354,
+            "dailyFluctuation": 495
+        }
+    },
+    {
+        "department": { "name": "nulla", "id": 95 },
+        "board": { "name": "rhoncus", "id": 94 },
+        "post": {
+            "id": 49,
+            "title": "a suscipit nulla elit ac nulla sed vel enim sit",
+            "uploadDate": "2022-09-02",
+            "view": 1202,
+            "dailyFluctuation": 52
+        }
+    },
+    {
+        "department": { "name": "at nunc", "id": 21 },
+        "board": { "name": "ut", "id": 36 },
+        "post": {
+            "id": 65,
+            "title": "massa volutpat convallis morbi odio",
+            "uploadDate": "2022-07-14",
+            "view": 2682,
+            "dailyFluctuation": 304
+        }
+    },
+    {
+        "department": { "name": "sem duis", "id": 54 },
+        "board": { "name": "consequat", "id": 24 },
+        "post": {
+            "id": 34,
+            "title": "sit amet eleifend pede libero",
+            "uploadDate": "2022-09-09",
+            "view": 2068,
+            "dailyFluctuation": 148
+        }
+    },
+    {
+        "department": { "name": "pulvinar", "id": 79 },
+        "board": { "name": "iaculis", "id": 83 },
+        "post": {
+            "id": 99,
+            "title": "maecenas leo odio condimentum id luctus nec molestie sed",
+            "uploadDate": "2023-05-07",
+            "view": 5990,
+            "dailyFluctuation": 808
+        }
+    },
+    {
+        "department": { "name": "ullamcorper", "id": 78 },
+        "board": { "name": "etiam", "id": 60 },
+        "post": {
+            "id": 91,
+            "title": "id nisl venenatis lacinia aenean sit amet justo morbi ut",
+            "uploadDate": "2023-02-19",
+            "view": 3262,
+            "dailyFluctuation": 183
+        }
+    }
+]
