@@ -6,3 +6,10 @@
 yarn install
 yarn dev
 ```
+
+or
+
+```
+docker-compose up
+```
+후 http://localhost 접속
