@@ -21,7 +21,7 @@ function Header() {
                         size="large"
                         edge="start"
                         aria-label="logo"
-                        onClick={() => setOpen(true)}
+                        // onClick={() => setOpen(true)}
                         sx={{
                             "&:svg": { bgcolor: "#8A6157" },
                             borderRadius: "10px",

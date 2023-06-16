@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import HomeLayout from "../../components/HomeLayout";
-import BulletinSection from "../../components/BulletinSection";
 import RollingHotArticleSection from "../../components/RollingHotArticleSection";
 import SearchSection from "../../components/SearchSection";
 import { useResetRecoilState } from "recoil";
 import { breadcrumbState } from "../../store/store";
+import Tabs from "../../components/Tabs";
 
 export default function Home() {
     console.info("Home Rendered!");
@@ -17,7 +17,7 @@ export default function Home() {
         <HomeLayout>
             <RollingHotArticleSection />
             <SearchSection />
-            <BulletinSection />
+            <Tabs />
         </HomeLayout>
     );
 }

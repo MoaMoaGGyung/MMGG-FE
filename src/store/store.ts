@@ -99,3 +99,13 @@ export const keywordAtom = atom({
     key: "keywordAtom",
     default: "",
 });
+
+export const allDepartmentAtom = atom<CommonType[]>({
+    key: "allDepartmentAtom",
+    default: [],
+});
+
+export const tabAtom = atom<"1" | "2">({
+    key: "tabAtom",
+    default: "1",
+});

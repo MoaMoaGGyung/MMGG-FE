@@ -2,14 +2,19 @@ import { Card, CardContent, Divider, Stack, Typography } from "@mui/material";
 import Cell from "../Cell";
 import CustomLink from "../CustomLink";
 import React, { useCallback, useEffect, useState } from "react";
-import TitleSection from "../TitleSection";
 import { Masonry } from "@mui/lab";
-import { instance, keywordAtom, recentPostAtom } from "../../store/store";
+import {
+    allDepartmentAtom,
+    instance,
+    keywordAtom,
+    recentPostAtom,
+} from "../../store/store";
 import { debounce } from "lodash";
 import { RecentPostType } from "../../types/types";
 import CardSkeleton from "../Skeletons/CardSkeleton";
 import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { CommonType } from "../../types/types";
 
 const source = axios.CancelToken.source();
 
@@ -17,6 +22,7 @@ const BulletinSection = () => {
     console.info("BulletinSection rendered!");
     const keyword = useRecoilValue(keywordAtom);
     const [recentPosts, setRecentPosts] = useRecoilState(recentPostAtom);
+    const [allDepartment, setAllDepartment] = useRecoilState(allDepartmentAtom);
     const [copy, setCopy] = useState<RecentPostType[]>([]);
     const [loading, setLoading] = useState(false);
     const searchKeyword = useCallback(
@@ -37,21 +43,14 @@ const BulletinSection = () => {
     }, [keyword, recentPosts]);
 
     useEffect(() => {
-        const api = async () => {
+        async function api<T>(path: string, handleSucess: (data: T) => void) {
             setLoading(true);
             try {
-                const response = await instance<RecentPostType[]>(
-                    `/recent-posts?limit=6`,
-                    {
-                        cancelToken: source.token,
-                    }
-                );
+                const response = await instance<T>(path, {
+                    cancelToken: source.token,
+                });
                 if (response.status === 200) {
-                    const tmp = response.data.filter(({ recent_posts }) => {
-                        return recent_posts.length;
-                    });
-                    setRecentPosts(tmp);
-                    setCopy(tmp);
+                    handleSucess(response.data);
                 } else {
                     console.error(response);
                 }
@@ -62,8 +61,23 @@ const BulletinSection = () => {
             } finally {
                 setLoading(false);
             }
-        };
-        if (!recentPosts.length) api();
+        }
+
+        if (!recentPosts.length) {
+            api<RecentPostType[]>(`/recent-posts?limit=6`, (data) => {
+                const tmp = data.filter(({ recent_posts }) => {
+                    return recent_posts.length;
+                });
+                setRecentPosts(tmp);
+                setCopy(tmp);
+            });
+        }
+
+        if (!allDepartment.length) {
+            api<CommonType[]>(`/departments_only`, (data) => {
+                setAllDepartment(data);
+            });
+        }
         return () => {
             loading && source.cancel();
         };
@@ -71,8 +85,6 @@ const BulletinSection = () => {
 
     return (
         <Stack direction={"column"} rowGap={2} width={"100%"}>
-            <TitleSection title="📄 게시판" />
-            <Divider sx={{ width: "100%" }} />
             {!loading ? (
                 <Masonry
                     columns={{ xs: 1, sm: 2, md: 3 }}
