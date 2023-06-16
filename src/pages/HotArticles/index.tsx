@@ -5,7 +5,6 @@ import TitleSection from "../../components/TitleSection";
 import { Box } from "@mui/system";
 import Cell from "../../components/Cell";
 import { ArrowDropUp } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { breadcrumbState, hotPostAtom, instance } from "../../store/store";
 import { useCallback, useEffect, useState } from "react";
@@ -19,7 +18,6 @@ import {
 import CustomLink from "../../components/CustomLink";
 
 function HotArticles() {
-    const navigate = useNavigate();
     const [hotPosts, setHotPosts] = useState<HotPostType[]>([]);
     const [globalHotState, setGlobalHotState] =
         useRecoilState<HotPostType[]>(hotPostAtom);

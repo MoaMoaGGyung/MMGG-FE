@@ -10,7 +10,6 @@ import { ArrowDropUp } from "@mui/icons-material";
 import { HotPostType } from "../../types/types";
 import axios from "axios";
 import PostSkeleton from "../Skeletons/PostSkeleton";
-import { useNavigate } from "react-router-dom";
 import ArticleItemDetail from "../ArticleItemDetail";
 import CustomLink from "../CustomLink";
 
@@ -45,7 +44,6 @@ const RollingHotArticleSection = () => {
     const [hotPosts, setHotPosts] = useState<HotPostType[]>([]);
     const [globalHotState, setGlobalHotState] =
         useRecoilState<HotPostType[]>(hotPostAtom);
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (globalHotState.length) {
