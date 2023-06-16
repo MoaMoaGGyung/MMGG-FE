@@ -6,7 +6,7 @@ import {
     createTheme,
 } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import BulletinSection from "../BulletinSection";
+import RecentPostSection from "../RecentPostSection";
 import DepartmentOnlySection from "../DepartmentOnlySection";
 import { useRecoilState } from "recoil";
 import { tabAtom } from "../../store/store";
@@ -68,7 +68,7 @@ function Tabs() {
                     </TabList>
                 </Box>
                 <TabPanel value="1" sx={{ width: "100%" }}>
-                    <BulletinSection />
+                    <RecentPostSection />
                 </TabPanel>
                 <TabPanel value="2" sx={{ width: "100%" }}>
                     <DepartmentOnlySection />

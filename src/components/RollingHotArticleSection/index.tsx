@@ -17,7 +17,7 @@ const theadTitle = ["랭킹", "학과", "게시판", "제목", "날짜", "주간
 const source = axios.CancelToken.source();
 
 const RollingHotArticleSection = () => {
-    console.info("RollingHotArticleSection rendered!");
+    // console.info("RollingHotArticleSection rendered!");
     const [curItem, setCurItem] = useState(0);
     const timer = useRef<null | number>();
     const [hotPosts, setHotPosts] = useState<HotPostType[]>([]);

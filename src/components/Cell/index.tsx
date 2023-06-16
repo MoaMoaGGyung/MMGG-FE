@@ -1,11 +1,11 @@
-import { Box, BoxProps } from "@mui/material";
+import { Box, BoxProps, TooltipProps } from "@mui/material";
 import React from "react";
 
-interface CellType extends BoxProps {
-    children: React.ReactNode;
-}
-
-const Cell = ({ children, justifyContent, ...rest }: CellType) => {
+interface CellType extends BoxProps {}
+const Cell = (
+    { children, justifyContent, ...rest }: CellType,
+    ref: React.ForwardedRef<TooltipProps>
+) => {
     return (
         <Box
             display={"flex"}
@@ -15,6 +15,7 @@ const Cell = ({ children, justifyContent, ...rest }: CellType) => {
             position={"relative"}
             overflow={"hidden"}
             whiteSpace={"nowrap"}
+            ref={ref}
             {...rest}
         >
             {children}
@@ -22,4 +23,4 @@ const Cell = ({ children, justifyContent, ...rest }: CellType) => {
     );
 };
 
-export default Cell;
+export default React.forwardRef(Cell);

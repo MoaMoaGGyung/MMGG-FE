@@ -1,7 +1,7 @@
-import { Search } from "@mui/icons-material";
-import { List, ListItem, ListItemIcon } from "@mui/material";
+import { Cancel, CancelOutlined, Search } from "@mui/icons-material";
+import { List, ListItem, ListItemButton, ListItemIcon } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { useRecoilState } from "recoil";
 import { keywordAtom } from "../../store/store";
@@ -17,6 +17,7 @@ const Searchbar = styled.input`
 const SearchSection = () => {
     console.info("SearchSection rendered!");
     const [keyword, setKeyword] = useRecoilState(keywordAtom);
+    const [hover, setHover] = useState(false);
     return (
         <Box
             justifyContent={"center"}
@@ -37,6 +38,20 @@ const SearchSection = () => {
                         placeholder="학과 검색"
                         onChange={(e) => setKeyword(e.target.value)}
                     />
+                    <ListItemIcon
+                        onMouseEnter={() => setHover(true)}
+                        onMouseLeave={() => setHover(false)}
+                        onClick={() => setKeyword("")}
+                        sx={{
+                            p: 0,
+                            minWidth: 0,
+                            "&:hover": {
+                                cursor: "pointer",
+                            },
+                        }}
+                    >
+                        {hover ? <Cancel /> : <CancelOutlined />}
+                    </ListItemIcon>
                 </ListItem>
             </List>
         </Box>
