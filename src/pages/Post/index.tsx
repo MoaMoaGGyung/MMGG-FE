@@ -177,6 +177,12 @@ const Post = () => {
             </Box>
             <Box
                 width={"80%"}
+                sx={{
+                    "& table, & tr, & td": {
+                        border: "1px solid black",
+                        borderCollapse: "collapse",
+                    },
+                }}
                 dangerouslySetInnerHTML={{
                     __html: state.post.body,
                 }}
