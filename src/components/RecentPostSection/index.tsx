@@ -1,7 +1,5 @@
-import { Card, CardContent, Divider, Stack, Typography } from "@mui/material";
-import Cell from "../Cell";
-import CustomLink from "../CustomLink";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Stack } from "@mui/material";
+import React, { useCallback, useEffect, useState } from "react";
 import { Masonry } from "@mui/lab";
 import {
     allDepartmentAtom,
