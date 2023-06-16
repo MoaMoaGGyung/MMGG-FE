@@ -51,7 +51,7 @@ function HotArticles() {
         "게시판",
         "제목",
         "날짜",
-        "일일 변동량",
+        "주간 변동량",
     ];
     return (
         <HomeLayout>
