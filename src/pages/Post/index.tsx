@@ -25,9 +25,10 @@ const Post = () => {
             if (response.status === 200) {
                 const hostInjectedData = produce(response.data, (draft) => {
                     draft.post.body = draft.post.body.replaceAll(
-                        'src="',
+                        'src="/',
                         `src="${draft.post.base_url}`
                     );
+                    console.debug(draft.post.base_url);
                 });
                 setState(hostInjectedData);
                 setBreadcrumbState({

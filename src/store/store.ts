@@ -73,24 +73,35 @@ export const postAtom = atom<CommonType>({
     },
 });
 
+export const hotAtom = atom<CommonType>({
+    key: "hotAtom",
+    default: {
+        name: "",
+        id: 0,
+    },
+});
+
 export const breadcrumbState = selector<BreadcrumbType>({
     key: "breadcrumbState",
     get: ({ get }) => {
         const department = get(departmentAtom);
         const board = get(boardAtom);
         const post = get(postAtom);
-        return { department, board, post };
+        const hot = get(hotAtom);
+        return { department, board, post, hot };
     },
     set: ({ set, reset }, newValue) => {
         if (!(newValue instanceof DefaultValue)) {
-            const { department, board, post } = newValue;
+            const { department, board, post, hot } = newValue;
             if (department) set(departmentAtom, department);
             if (board) set(boardAtom, board);
             if (post) set(postAtom, post);
+            if (hot) set(hotAtom, hot);
         } else {
             reset(departmentAtom);
             reset(boardAtom);
             reset(postAtom);
+            reset(hotAtom);
         }
     },
 });

@@ -55,6 +55,7 @@ export type BreadcrumbType = {
     department?: CommonType;
     board?: CommonType;
     post?: CommonType;
+    hot?: CommonType;
 };
 
 export type KeywordType = string;

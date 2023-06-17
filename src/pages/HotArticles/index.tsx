@@ -5,7 +5,7 @@ import TitleSection from "../../components/TitleSection";
 import { Box } from "@mui/system";
 import Cell from "../../components/Cell";
 import { ArrowDropUp } from "@mui/icons-material";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
 import { breadcrumbState, hotPostAtom, instance } from "../../store/store";
 import { useCallback, useEffect, useState } from "react";
 import HotArticlesSkeleton from "../../components/Skeletons/HotArticlesSkeleton";
@@ -21,7 +21,7 @@ function HotArticles() {
     const [hotPosts, setHotPosts] = useState<HotPostType[]>([]);
     const [globalHotState, setGlobalHotState] =
         useRecoilState<HotPostType[]>(hotPostAtom);
-    const resetBreadcrumbState = useResetRecoilState(breadcrumbState);
+    const setBreadcrumbState = useSetRecoilState(breadcrumbState);
 
     const api = useCallback(async () => {
         const response = await instance<HotPostType[]>("/hot");
@@ -37,7 +37,7 @@ function HotArticles() {
     }, []);
 
     useEffect(() => {
-        resetBreadcrumbState();
+        setBreadcrumbState({ hot: { name: "hot", id: 0 } });
     }, []);
 
     useEffect(() => {

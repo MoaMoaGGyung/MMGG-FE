@@ -23,7 +23,6 @@ const RecentPostSection = () => {
     const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
     const debouncedKeyworkdUpdateFunction = useCallback(
         debounce((keyword: string) => {
-            console.debug(keyword);
             setDebouncedKeyword(keyword);
         }, 300),
         []

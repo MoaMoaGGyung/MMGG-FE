@@ -1,5 +1,5 @@
-import { useRecoilState } from "recoil";
-import { hotPostAtom, instance } from "../../store/store";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { breadcrumbState, hotPostAtom, instance } from "../../store/store";
 import React, { useEffect, useRef, useState } from "react";
 import TitleSection from "../TitleSection";
 import { Divider } from "@mui/material";
@@ -44,6 +44,7 @@ const RollingHotArticleSection = () => {
     const [hotPosts, setHotPosts] = useState<HotPostType[]>([]);
     const [globalHotState, setGlobalHotState] =
         useRecoilState<HotPostType[]>(hotPostAtom);
+    const setBreadcrumbState = useSetRecoilState(breadcrumbState);
 
     useEffect(() => {
         if (globalHotState.length) {

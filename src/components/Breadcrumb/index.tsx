@@ -46,7 +46,7 @@ function Breadcrumb() {
                             <CustomLink
                                 to={`/department/${
                                     state.department!.id
-                                }/board/${state.board.id}`}
+                                }/board/${state.board.id}?page=1`}
                                 sx={{
                                     "&:hover": {
                                         textDecoration: "underline",
@@ -77,6 +77,20 @@ function Breadcrumb() {
                                 <Cell>{state.post.name}</Cell>
                             </CustomLink>
                         )}
+                    {location.pathname.indexOf("hot") > -1 && (
+                        <CustomLink
+                            to={`/hot`}
+                            sx={{
+                                "&:hover": {
+                                    textDecoration: "underline",
+                                    color: "#3a3a3a",
+                                    cursor: "pointer",
+                                },
+                            }}
+                        >
+                            <Cell>{`hot`}</Cell>
+                        </CustomLink>
+                    )}
                 </Breadcrumbs>
             </Box>
         </Box>
