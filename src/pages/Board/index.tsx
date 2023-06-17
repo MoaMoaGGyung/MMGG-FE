@@ -16,18 +16,14 @@ const Board = () => {
     const { type, direction } = useRecoilValue(alignmentState);
     const { dId, bId } = useParams() as { dId: string; bId: string };
     const [searchParams, setSearchParams] = useSearchParams();
-    const getPage = useCallback(() => {
-        return parseInt(searchParams.get("page") as string);
-    }, []);
-    const [page, setPage] = useState(getPage);
     const navigate = useNavigate();
     const [state, setState] = useState<BoardType>({} as BoardType);
     const [loading, setLoading] = useState(false);
     const setBreadcrumb = useSetRecoilState(breadcrumbState);
-
     const handleChange = useCallback(
         (_: React.ChangeEvent<unknown>, value: number) => {
-            setPage(value);
+            searchParams.set("page", value + ``);
+            setSearchParams(searchParams);
         },
         []
     );
@@ -51,7 +47,6 @@ const Board = () => {
                         id: parseInt(bId),
                     },
                 });
-                setPage(response.data.curPage);
             }
         } catch (error) {
             console.error(error);
@@ -61,16 +56,12 @@ const Board = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        if (state.curPage && state.curPage !== page) {
-            api(page - 1);
-            searchParams.set("page", `${page}`);
-            setSearchParams(searchParams);
-        }
-    }, [page]);
+        api(parseInt(searchParams.get("page")!) - 1);
+    }, [searchParams]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        if (!state.bname) api(page - 1);
+        api(parseInt(searchParams.get("page")!) - 1);
     }, []);
 
     return !loading ? (
@@ -121,7 +112,7 @@ const Board = () => {
                 <Pagination
                     count={state.totalPage}
                     shape="rounded"
-                    page={page}
+                    page={parseInt(searchParams.get("page")!)}
                     onChange={handleChange}
                 />
             </Box>
