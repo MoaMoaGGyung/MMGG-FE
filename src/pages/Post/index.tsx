@@ -7,6 +7,10 @@ import { PostType } from "../../types/types";
 import { useSetRecoilState } from "recoil";
 import { produce } from "immer";
 import PostDetailSkeleton from "../../components/Skeletons/PostDetailSkeleton";
+import { bgcolor } from "@mui/system";
+import CustomLink from "../../components/CustomLink";
+import Cell from "../../components/Cell";
+import { ArrowDropUp, ArrowUpward } from "@mui/icons-material";
 
 const Post = () => {
     const { dId, bId, pId } = useParams() as {
@@ -189,6 +193,118 @@ const Post = () => {
                     __html: state.post.body,
                 }}
             />
+            <Box width={"80%"} borderTop={"1px solid #a4a8b8"}>
+                <Box
+                    display={"grid"}
+                    gridTemplateColumns={"20% auto"}
+                    flexDirection={"row"}
+                    borderBottom={"1px solid #a4a8b8"}
+                >
+                    <Box
+                        textAlign={"center"}
+                        borderRight={"1px solid #a4a8b8"}
+                        fontSize={"20px"}
+                        fontFamily={"Nanum Gothic"}
+                        py={2}
+                    >
+                        다음글
+                    </Box>
+                    <Cell
+                        justifyContent={"left"}
+                        sx={{
+                            boxSizing: "border-box",
+                            height: "100%",
+                            width: "100%",
+                            pl: 2,
+                            "& a": {
+                                width: "100%",
+                            },
+                        }}
+                    >
+                        <CustomLink
+                            to="/"
+                            sx={{
+                                width: "100%",
+                                color: "black",
+                                fontWeight: 400,
+                                "&:hover": {
+                                    color: "black",
+                                },
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    boxSizing: "border-box",
+                                    width: "100%",
+                                    pl: 1,
+                                    borderRadius: "10px",
+                                    "&:hover": {
+                                        cursor: "pointer",
+                                        bgcolor: "#aaa",
+                                    },
+                                }}
+                            >
+                                aaa
+                            </Box>
+                        </CustomLink>
+                    </Cell>
+                </Box>
+                <Box
+                    display={"grid"}
+                    gridTemplateColumns={"20% auto"}
+                    flexDirection={"row"}
+                    borderBottom={"1px solid #a4a8b8"}
+                >
+                    <Box
+                        textAlign={"center"}
+                        borderRight={"1px solid #a4a8b8"}
+                        fontSize={"20px"}
+                        fontFamily={"Nanum Gothic"}
+                        py={2}
+                    >
+                        이전글
+                    </Box>
+                    <Cell
+                        justifyContent={"left"}
+                        sx={{
+                            boxSizing: "border-box",
+                            height: "100%",
+                            width: "100%",
+                            pl: 2,
+                            "& a": {
+                                width: "100%",
+                            },
+                        }}
+                    >
+                        <CustomLink
+                            to="/"
+                            sx={{
+                                width: "100%",
+                                color: "black",
+                                fontWeight: 400,
+                                "&:hover": {
+                                    color: "black",
+                                },
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    boxSizing: "border-box",
+                                    width: "100%",
+                                    pl: 1,
+                                    borderRadius: "10px",
+                                    "&:hover": {
+                                        cursor: "pointer",
+                                        bgcolor: "#aaa",
+                                    },
+                                }}
+                            >
+                                aaa
+                            </Box>
+                        </CustomLink>
+                    </Cell>
+                </Box>
+            </Box>
         </HomeLayout>
     ) : (
         <PostDetailSkeleton />

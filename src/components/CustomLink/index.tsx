@@ -18,7 +18,7 @@ const CustomLink = ({ children, to, onLinkClicked, sx }: CustomLinkType) => {
             "&:hover": {
                 cursor: "pointer",
                 color: "#3d3aff",
-                textDecoration: "underline",
+                textDecoration: "none",
             },
         },
         sx
