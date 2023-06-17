@@ -2,15 +2,13 @@ import { Menu, Person } from "@mui/icons-material";
 import {
     AppBar,
     Box,
-    Button,
     Drawer,
     IconButton,
-    Link,
     Toolbar,
     Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 function Header() {
     const [open, setOpen] = useState(false);
