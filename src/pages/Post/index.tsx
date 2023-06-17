@@ -7,10 +7,8 @@ import { PostType } from "../../types/types";
 import { useSetRecoilState } from "recoil";
 import { produce } from "immer";
 import PostDetailSkeleton from "../../components/Skeletons/PostDetailSkeleton";
-import { bgcolor } from "@mui/system";
 import CustomLink from "../../components/CustomLink";
 import Cell from "../../components/Cell";
-import { ArrowDropUp, ArrowUpward } from "@mui/icons-material";
 
 const Post = () => {
     const { dId, bId, pId } = useParams() as {
